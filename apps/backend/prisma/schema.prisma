@@ -1,0 +1,288 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String     @id @default(uuid())
+  email        String     @unique
+  passwordHash String
+  name         String
+  role         String     @default("ADMIN") // SUPER_ADMIN, ADMIN, EDITOR
+  isActive     Boolean    @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  auditLogs    AuditLog[]
+
+  @@map("users")
+}
+
+model Brand {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  slug      String    @unique
+  logoUrl   String?
+  isPopular Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  models    Model[]
+  vehicles  Vehicle[]
+
+  @@map("brands")
+}
+
+model Model {
+  id        String    @id @default(uuid())
+  brandId   String
+  brand     Brand     @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  name      String
+  slug      String    @unique
+  bodyType  String?
+  createdAt DateTime  @default(now())
+  versions  Version[]
+  vehicles  Vehicle[]
+
+  @@map("models")
+}
+
+model Version {
+  id        String    @id @default(uuid())
+  modelId   String
+  model     Model     @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  name      String
+  yearStart Int?
+  yearEnd   Int?
+  powerHp   Int?
+  vehicles  Vehicle[]
+
+  @@map("versions")
+}
+
+model FuelType {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  code     String    @unique
+  vehicles Vehicle[]
+
+  @@map("fuel_types")
+}
+
+model DgtEcoLabel {
+  id          String    @id @default(uuid())
+  code        String    @unique
+  name        String
+  description String?
+  colorBadge  String
+  vehicles    Vehicle[]
+
+  @@map("dgt_eco_labels")
+}
+
+model Dealership {
+  id        String    @id @default(uuid())
+  name      String
+  slug      String    @unique
+  cif       String?   @unique
+  email     String
+  phone     String
+  whatsapp  String?
+  address   String?
+  province  String
+  city      String?
+  logoUrl   String?
+  isPartner Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  vehicles  Vehicle[]
+
+  @@map("dealerships")
+}
+
+model Vehicle {
+  id               String       @id @default(uuid())
+  title            String
+  slug             String       @unique
+  vin              String?      @unique
+  brandId          String
+  brand            Brand        @relation(fields: [brandId], references: [id])
+  modelId          String
+  model            Model        @relation(fields: [modelId], references: [id])
+  versionId        String?
+  version          Version?     @relation(fields: [versionId], references: [id])
+  fuelTypeId       String
+  fuelType         FuelType     @relation(fields: [fuelTypeId], references: [id])
+  dgtEcoLabelId    String
+  dgtEcoLabel      DgtEcoLabel  @relation(fields: [dgtEcoLabelId], references: [id])
+  dealershipId     String?
+  dealership       Dealership?  @relation(fields: [dealershipId], references: [id])
+  
+  price            Float
+  originalPrice    Float?
+  year             Int
+  kilometers       Int
+  powerHp          Int
+  transmission     String       @default("AUTOMATIC")
+  doors            Int          @default(5)
+  seats            Int          @default(5)
+  color            String?
+  exteriorColorHex String?
+  description      String
+  equipment        String       @default("[]")
+  
+  isFeatured       Boolean      @default(false)
+  isReserved       Boolean      @default(false)
+  isSold           Boolean      @default(false)
+  status           String       @default("PUBLISHED")
+  viewCount        Int          @default(0)
+  
+  metaTitle        String?
+  metaDescription  String?
+  
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  
+  images           VehicleImage[]
+  leadRequests     LeadRequest[]
+
+  @@map("vehicles")
+}
+
+model VehicleImage {
+  id           String   @id @default(uuid())
+  vehicleId    String
+  vehicle      Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  url          String
+  alt          String?
+  isMain       Boolean  @default(false)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  @@map("vehicle_images")
+}
+
+model LeadRequest {
+  id             String   @id @default(uuid())
+  type           String   @default("B2B_PARTNER_REQUEST")
+  name           String
+  companyName    String?
+  email          String
+  phone          String
+  whatsapp       String?
+  province       String
+  approxVehicles String?
+  businessType   String?
+  vehicleId      String?
+  vehicle        Vehicle? @relation(fields: [vehicleId], references: [id])
+  message        String
+  status         String   @default("NEW")
+  notes          String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("lead_requests")
+}
+
+model AdPlacement {
+  id          String       @id @default(uuid())
+  code        String       @unique
+  name        String
+  description String?
+  campaigns   AdCampaign[]
+
+  @@map("ad_placements")
+}
+
+model AdCampaign {
+  id               String            @id @default(uuid())
+  name             String
+  placementId      String
+  placement        AdPlacement       @relation(fields: [placementId], references: [id])
+  type             String            @default("IMAGE")
+  imageUrl         String?
+  targetUrl        String?
+  customHtml       String?
+  adSenseSlotId    String?
+  startDate        DateTime
+  endDate          DateTime
+  priority         Int               @default(1)
+  isActive         Boolean           @default(true)
+  impressionsCount Int               @default(0)
+  clicksCount      Int               @default(0)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  impressionLogs   AdImpressionLog[]
+  clickLogs        AdClickLog[]
+
+  @@map("ad_campaigns")
+}
+
+model AdImpressionLog {
+  id         String     @id @default(uuid())
+  campaignId String
+  campaign   AdCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime   @default(now())
+
+  @@map("ad_impression_logs")
+}
+
+model AdClickLog {
+  id         String     @id @default(uuid())
+  campaignId String
+  campaign   AdCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime   @default(now())
+
+  @@map("ad_click_logs")
+}
+
+model TrackingScriptConfig {
+  id               String   @id @default(uuid())
+  provider         String   @unique
+  trackingId       String?
+  apiSecret        String?
+  isActive         Boolean  @default(false)
+  customScriptHtml String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("tracking_script_configs")
+}
+
+model BlogPost {
+  id              String   @id @default(uuid())
+  title           String
+  slug            String   @unique
+  summary         String
+  content         String
+  coverImageUrl   String?
+  author          String   @default("AutoMaestro Redacción")
+  isPublished     Boolean  @default(true)
+  publishedAt     DateTime @default(now())
+  metaTitle       String?
+  metaDescription String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("blog_posts")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  action    String
+  entity    String
+  entityId  String?
+  details   String?
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  @@map("audit_logs")
+}
