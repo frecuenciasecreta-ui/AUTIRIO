@@ -6,6 +6,8 @@ import * as sanitizeHtml from 'sanitize-html';
 export type LeadType = string;
 export type LeadStatus = string;
 
+@Injectable()
+export class LeadsService {
   private readonly logger = new Logger(LeadsService.name);
 
   constructor(
