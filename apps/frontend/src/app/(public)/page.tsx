@@ -14,8 +14,12 @@ async function getFeaturedVehicles(): Promise<Vehicle[]> {
       next: { revalidate: 60 },
     });
     if (!res.ok) return getFallbackVehicles();
-    const data = await res.json();
-    return data.vehicles || getFallbackVehicles();
+    const result = await res.json();
+    const list = result?.data || result?.vehicles;
+    if (Array.isArray(list) && list.length > 0) {
+      return list;
+    }
+    return getFallbackVehicles();
   } catch (e) {
     return getFallbackVehicles();
   }
