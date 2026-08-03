@@ -21,7 +21,9 @@ export default function AdminLoginPage() {
         body: JSON.stringify({ email, password }),
       });
 
-      // Token is now set via httpOnly cookie by the backend
+      if (res.accessToken) {
+        localStorage.setItem('automaestro_token', res.accessToken);
+      }
       localStorage.setItem('automaestro_user', JSON.stringify(res.user));
 
       window.location.href = '/admin/dashboard';
