@@ -148,13 +148,13 @@ export async function generateMetadata(
 
   if (!vehicle) {
     return {
-      title: 'Vehículo no encontrado - Autirio',
+      title: 'Vehículo no encontrado - IMPERIUM Auto Digital',
     };
   }
 
-  const title = `${vehicle.title} de Segunda Mano Certificado | Autirio`;
-  const description = `${vehicle.title} en excelente estado. ${vehicle.year}, ${vehicle.kilometers} km, ${vehicle.powerHp} CV. Certificado y garantizado en Autirio.`;
-  const image = vehicle.images?.[0]?.url || 'https://autirio.com/default-car.jpg';
+  const title = `${vehicle.title} de Segunda Mano Certificado | IMPERIUM Auto Digital`;
+  const description = `${vehicle.title} en excelente estado. ${vehicle.year}, ${vehicle.kilometers} km, ${vehicle.powerHp} CV. Certificado y garantizado en IMPERIUM Auto Digital.`;
+  const image = vehicle.images?.[0]?.url || 'https://imperiumautodigital.es/default-car.jpg';
 
   return {
     title,

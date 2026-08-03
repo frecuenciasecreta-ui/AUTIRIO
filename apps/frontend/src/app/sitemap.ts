@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 // This URL should be the production URL of the frontend
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://autirio.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://imperiumautodigital.es';
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

@@ -4,9 +4,9 @@ import PublicLayoutWrapper from '@/components/public/PublicLayoutWrapper';
 import CookieBanner from '@/components/public/CookieBanner';
 
 export const metadata = {
-  title: 'Autirio España | Vehículos de Selección Certificados y Alta Gama',
-  description: 'Plataforma líder en España para la compra de coches seminuevos y de ocasión verificados. Marcas premium: Porsche, BMW, Mercedes-Benz, Audi, Tesla con Etiqueta DGT CERO y ECO.',
-  keywords: 'coches segunda mano españa, porsche 911 ocasion, vehiculos etiqueta cero madrid, coches electricos barcelona, concesionarios premium',
+  title: 'IMPERIUM Auto Digital | Sistema de Marketing & Comercialización Automotriz',
+  description: 'Infraestructura comercial y de marketing para concesionarios en España. Producción audiovisual 4K, publicidad digital y catálogo de selección.',
+  keywords: 'imperium auto digital, marketing concesionarios españa, coches segunda mano madrid, vehiculos certificacion barcelona, prueba piloto concesionarios',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
