@@ -7,13 +7,13 @@ async function main() {
   console.log('🌱 Starting AutoMaestro Database Seeding...');
 
   // 1. SuperAdmin User
-  const adminPassword = await argon2.hash('AutoMaestroAdmin2026!');
+  const adminPassword = await argon2.hash('ImperiumAdmin2026!');
   const adminUser = await prisma.user.upsert({
-    where: { email: 'admin@automaestro.es' },
+    where: { email: 'admin@imperiumautodigital.es' },
     update: {},
     create: {
-      email: 'admin@automaestro.es',
-      name: 'Director de Operaciones AutoMaestro',
+      email: 'admin@imperiumautodigital.es',
+      name: 'Director Comercial IMPERIUM Auto Digital',
       passwordHash: adminPassword,
       role: 'SUPER_ADMIN',
     },
