@@ -1,104 +1,94 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import HeroSearch from '@/components/public/HeroSearch';
 import HeroShowcase from '@/components/public/HeroShowcase';
 import CarCard from '@/components/public/CarCard';
 import DgtBadge from '@/components/public/DgtBadge';
 import AdBannerSlot from '@/components/ads/AdBannerSlot';
-import AutirioLogo from '@/components/ui/AutirioLogo';
 import { Vehicle } from '@/lib/types';
 import { 
   ShieldCheck, Sparkles, Building2, TrendingUp, Award, ArrowRight, 
-  Video, Target, Rocket, CheckCircle2, ChevronRight, Sliders, PlayCircle 
+  Video, Target, Rocket, CheckCircle2, ChevronRight, Zap, Shield, 
+  Clock, Lock, PlayCircle 
 } from 'lucide-react';
 
-async function getFeaturedVehicles(): Promise<Vehicle[]> {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'}/vehicles/public?isFeatured=true&limit=6`, {
-      next: { revalidate: 60 },
-    });
-    if (!res.ok) return getFallbackVehicles();
-    const result = await res.json();
-    const list = result?.data || result?.vehicles;
-    if (Array.isArray(list) && list.length > 0) {
-      return list;
-    }
-    return getFallbackVehicles();
-  } catch (e) {
-    return getFallbackVehicles();
-  }
-}
+const FALLBACK_VEHICLES: Vehicle[] = [
+  {
+    id: '1',
+    title: 'Porsche 911 Carrera GTS PDK 480CV',
+    slug: 'porsche-911-carrera-gts-2024-madrid',
+    brand: { id: 'b1', name: 'Porsche', slug: 'porsche', isPopular: true },
+    model: { id: 'm1', brandId: 'b1', name: '911 Carrera GTS', slug: 'porsche-911' },
+    fuelType: { id: 'f1', name: 'Gasolina', code: 'GASOLINA' },
+    dgtEcoLabel: { id: 'l1', code: 'C', name: 'Etiqueta C', colorBadge: '#0072CE' },
+    price: 189900,
+    year: 2024,
+    kilometers: 8500,
+    powerHp: 480,
+    transmission: 'AUTOMATIC',
+    doors: 2,
+    seats: 4,
+    description: 'Unidad de reestreno exclusiva.',
+    equipment: ['Sport Chrono', 'Frenos cerámicos', 'Techo panorámico'],
+    isFeatured: true,
+    isReserved: false,
+    isSold: false,
+    status: 'PUBLISHED',
+    viewCount: 120,
+    images: [
+      { id: 'i1', url: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=800&q=80', isMain: true, displayOrder: 1 },
+    ],
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '2',
+    title: 'Porsche Taycan Turbo S 761CV Performance Plus',
+    slug: 'porsche-taycan-turbo-s-2023-barcelona',
+    brand: { id: 'b1', name: 'Porsche', slug: 'porsche', isPopular: true },
+    model: { id: 'm2', brandId: 'b1', name: 'Taycan Turbo S', slug: 'porsche-taycan' },
+    fuelType: { id: 'f2', name: '100% Eléctrico', code: 'ELECTRICO_BEV' },
+    dgtEcoLabel: { id: 'l2', code: 'CERO', name: 'Etiqueta CERO', colorBadge: '#00A3E0' },
+    price: 154900,
+    year: 2023,
+    kilometers: 14200,
+    powerHp: 761,
+    transmission: 'AUTOMATIC',
+    doors: 4,
+    seats: 4,
+    description: 'Superdeportivo 100% eléctrico con etiqueta CERO DGT.',
+    equipment: ['Porsche InnoDrive', 'Sonido Burmester', 'PASM'],
+    isFeatured: true,
+    isReserved: false,
+    isSold: false,
+    status: 'PUBLISHED',
+    viewCount: 310,
+    images: [
+      { id: 'i2', url: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=80', isMain: true, displayOrder: 1 },
+    ],
+    createdAt: new Date().toISOString(),
+  },
+];
 
-function getFallbackVehicles(): Vehicle[] {
-  return [
-    {
-      id: '1',
-      title: 'Porsche 911 Carrera GTS PDK 480CV',
-      slug: 'porsche-911-carrera-gts-2024-madrid',
-      brand: { id: 'b1', name: 'Porsche', slug: 'porsche', isPopular: true },
-      model: { id: 'm1', brandId: 'b1', name: '911 Carrera GTS', slug: 'porsche-911' },
-      fuelType: { id: 'f1', name: 'Gasolina', code: 'GASOLINA' },
-      dgtEcoLabel: { id: 'l1', code: 'C', name: 'Etiqueta C', colorBadge: '#0072CE' },
-      price: 189900,
-      year: 2024,
-      kilometers: 8500,
-      powerHp: 480,
-      transmission: 'AUTOMATIC',
-      doors: 2,
-      seats: 4,
-      description: 'Unidad de reestreno exclusiva.',
-      equipment: ['Sport Chrono', 'Frenos cerámicos', 'Techo panorámico'],
-      isFeatured: true,
-      isReserved: false,
-      isSold: false,
-      status: 'PUBLISHED',
-      viewCount: 120,
-      images: [
-        { id: 'i1', url: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=800&q=80', isMain: true, displayOrder: 1 },
-      ],
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: '2',
-      title: 'Porsche Taycan Turbo S 761CV Performance Plus',
-      slug: 'porsche-taycan-turbo-s-2023-barcelona',
-      brand: { id: 'b1', name: 'Porsche', slug: 'porsche', isPopular: true },
-      model: { id: 'm2', brandId: 'b1', name: 'Taycan Turbo S', slug: 'porsche-taycan' },
-      fuelType: { id: 'f2', name: '100% Eléctrico', code: 'ELECTRICO_BEV' },
-      dgtEcoLabel: { id: 'l2', code: 'CERO', name: 'Etiqueta CERO', colorBadge: '#00A3E0' },
-      price: 154900,
-      year: 2023,
-      kilometers: 14200,
-      powerHp: 761,
-      transmission: 'AUTOMATIC',
-      doors: 4,
-      seats: 4,
-      description: 'Superdeportivo 100% eléctrico con etiqueta CERO DGT.',
-      equipment: ['Porsche InnoDrive', 'Sonido Burmester', 'PASM'],
-      isFeatured: true,
-      isReserved: false,
-      isSold: false,
-      status: 'PUBLISHED',
-      viewCount: 310,
-      images: [
-        { id: 'i2', url: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=80', isMain: true, displayOrder: 1 },
-      ],
-      createdAt: new Date().toISOString(),
-    },
-  ];
-}
-
-export default async function HomePage() {
-  const featuredCars = await getFeaturedVehicles();
+export default function HomePage() {
+  const featuredCars = FALLBACK_VEHICLES;
 
   return (
     <div className="space-y-24 pb-20 bg-[#040508]">
       
-      {/* 1. HERO SHOWCASE PRESENTATION BANNER */}
+      {/* 1. HERO SHOWCASE PRESENTATION BANNER WITH FULLSCREEN VIDEO */}
       <HeroShowcase />
 
       {/* 2. QUICK SEARCH BAR SECTION */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20"
+      >
         <HeroSearch />
 
         {/* Popular Brand Pills */}
@@ -114,9 +104,58 @@ export default async function HomePage() {
             </Link>
           ))}
         </div>
-      </div>
+      </motion.div>
 
-      {/* 3. FEATURED VEHICLES CATALOG (MÁXIMA VISIBILIDAD DE VENTA DE COCHES DE PRIMERA MANO) */}
+      {/* 3. FEATURES SECTION (ANIMATED ICON CARDS FROM PROMPT) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          {/* Card 1: Verified Sellers */}
+          <motion.div 
+            whileHover={{ y: -6, scale: 1.02 }}
+            className="glass-card-electric p-8 rounded-3xl border border-white/10 space-y-4 shadow-xl"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-electric-500/20 border border-electric-500/30 flex items-center justify-center text-electric-cyan">
+              <ShieldCheck className="w-7 h-7" />
+            </div>
+            <h3 className="text-xl font-black text-white">Verified Sellers</h3>
+            <p className="text-sm text-slate-400 font-medium leading-relaxed">
+              Todos los vehículos e inventarios son verificados técnicamente con revisión de 150 puntos por nuestro equipo.
+            </p>
+          </motion.div>
+
+          {/* Card 2: Fast Transactions */}
+          <motion.div 
+            whileHover={{ y: -6, scale: 1.02 }}
+            className="glass-card-electric p-8 rounded-3xl border border-white/10 space-y-4 shadow-xl"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+              <Clock className="w-7 h-7" />
+            </div>
+            <h3 className="text-xl font-black text-white">Fast Transactions</h3>
+            <p className="text-sm text-slate-400 font-medium leading-relaxed">
+              Gestión comercial directa, coordinación de pruebas y cierre acelerado con soporte personalizado.
+            </p>
+          </motion.div>
+
+          {/* Card 3: Secure Payments */}
+          <motion.div 
+            whileHover={{ y: -6, scale: 1.02 }}
+            className="glass-card-electric p-8 rounded-3xl border border-white/10 space-y-4 shadow-xl"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-gold-500/20 border border-gold-500/30 flex items-center justify-center text-gold-400">
+              <Lock className="w-7 h-7" />
+            </div>
+            <h3 className="text-xl font-black text-white">Secure Payments</h3>
+            <p className="text-sm text-slate-400 font-medium leading-relaxed">
+              Modelo de importe neto protegido para el concesionario y operaciones de pago seguras respaldadas.
+            </p>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* 4. FEATURED VEHICLES CATALOG */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 border-b border-slate-800 pb-5">
           <div>
@@ -144,7 +183,7 @@ export default async function HomePage() {
         <AdBannerSlot placementCode="HOME_HERO" />
       </div>
 
-      {/* 4. DGT ECO LABELS BANNER IN SPAIN */}
+      {/* 5. DGT ECO LABELS BANNER IN SPAIN */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="glass-card-electric p-8 sm:p-12 rounded-3xl border border-electric-500/20 relative overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -198,7 +237,7 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* 5. IMPERIUM ECOSYSTEM CHESS LAYOUT (B2B INFRAESTRUCTURA DE CONCESIONARIOS AL FINAL DE LA PORTADA) */}
+      {/* 6. IMPERIUM ECOSYSTEM CHESS LAYOUT (B2B INFRAESTRUCTURA DE CONCESIONARIOS) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 py-6">
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <span className="text-xs font-extrabold uppercase tracking-widest text-gold-400 block">
@@ -212,7 +251,7 @@ export default async function HomePage() {
           </p>
         </div>
 
-        {/* CHESS ITEM 1: IMPERIUM MEDIA (Media a la izquierda, Texto a la derecha) */}
+        {/* CHESS ITEM 1: IMPERIUM MEDIA */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
           <div className="lg:col-span-6 relative h-72 sm:h-96 rounded-3xl overflow-hidden border border-gold-500/20 bg-slate-950 shadow-2xl group">
@@ -263,7 +302,7 @@ export default async function HomePage() {
 
         </div>
 
-        {/* CHESS ITEM 2: IMPERIUM PERFORMANCE (Texto a la izquierda, Media a la derecha) */}
+        {/* CHESS ITEM 2: IMPERIUM PERFORMANCE */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pt-8">
           
           <div className="lg:col-span-6 space-y-6 lg:pr-6 order-2 lg:order-1">
@@ -311,81 +350,37 @@ export default async function HomePage() {
 
         </div>
 
-        {/* CHESS ITEM 3: IMPERIUM COMMERCE (Media a la izquierda, Texto a la derecha) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pt-8">
-          
-          <div className="lg:col-span-6 relative h-72 sm:h-96 rounded-3xl overflow-hidden border border-gold-500/20 bg-slate-950 shadow-2xl group">
-            <Image
-              src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=1000&q=80"
-              alt="IMPERIUM Commerce Plan Piloto"
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
-              <span className="bg-gold-500/20 backdrop-blur-md border border-gold-500/40 text-gold-300 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider">
-                🚀 Prueba Piloto 45 Días sin Riesgo
-              </span>
-            </div>
-          </div>
-
-          <div className="lg:col-span-6 space-y-6 lg:pl-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-bold uppercase tracking-wider">
-              Capa 03 • Gestión Comercial
-            </div>
-            <h3 className="text-3xl font-black text-white leading-tight">
-              IMPERIUM Commerce
-            </h3>
-            <p className="text-sm text-slate-300 leading-relaxed font-medium">
-              Gestión inicial de consultas, filtrado de presupuestos y coordinación de citas. Operamos bajo el modelo de <strong>Importe Neto Protegido</strong>: el concesionario fija lo que necesita recibir y nuestro honorario se suma dentro del precio público.
-            </p>
-
-            <ul className="space-y-2.5 text-xs text-slate-300 font-medium">
-              <li className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-gold-400 flex-shrink-0" /> Prueba Piloto con 3 Vehículos por 45 Días</li>
-              <li className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-gold-400 flex-shrink-0" /> Cero Coste de Fijo Mensual</li>
-              <li className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-gold-400 flex-shrink-0" /> Compradores Filtrados y Citas Agendadas</li>
-            </ul>
-
-            <div className="pt-2">
-              <Link
-                href="/publica-con-nosotros"
-                className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-slate-950 bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 px-6 py-3.5 rounded-xl shadow-lg shadow-gold-500/20 hover:scale-105 transition-all"
-              >
-                Solicitar Prueba Piloto 3 Vehículos
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-
-        </div>
-
       </section>
 
-      {/* 6. B2B CONCESIONARIOS PILOT PROGRAM HIGH-CONVERSION BANNER */}
+      {/* 7. CTA SECTION WITH ANIMATED GRADIENT BACKGROUND */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-slate-950 via-slate-900 to-[#0A0E17] border border-gold-500/40 p-8 sm:p-14 shadow-2xl">
+        <motion.div 
+          whileHover={{ scale: 1.01 }}
+          transition={{ duration: 0.4 }}
+          className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 border border-electric-500/40 p-8 sm:p-14 shadow-2xl"
+        >
           
-          <div className="max-w-2xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-bold">
+          <div className="max-w-2xl space-y-6 relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric-500/10 border border-electric-500/30 text-electric-cyan text-xs font-bold uppercase tracking-wider">
               <Building2 className="w-4 h-4" />
               Exclusivo para Concesionarios en España
             </div>
 
             <h2 className="text-3xl sm:text-5xl font-black text-white leading-tight">
-              Activa una Prueba Piloto de 45 Días sin Riesgo
+              List Your Car / Activa tu Prueba Piloto (45 Días)
             </h2>
 
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-medium">
-              Seleccionamos 3 vehículos de tu concesionario, acordamos el precio neto que necesitas recibir, producimos contenido profesional y generamos compradores. Si no vendemos, no pagas honorarios por éxito.
+              Seleccionamos 3 vehículos de tu concesionario, acordamos el precio neto que necesitas recibir, producimos contenido profesional y generamos compradores. Si no vendemos, no pagas honorarios.
             </p>
 
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <Link
                 href="/publica-con-nosotros"
-                className="bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 hover:from-gold-500 hover:to-gold-600 text-slate-950 font-black text-sm px-8 py-4 rounded-2xl shadow-xl shadow-gold-500/20 flex items-center gap-2 transition-all hover:scale-105 uppercase tracking-wider"
+                className="bg-gradient-to-r from-electric-600 via-electric-500 to-electric-cyan hover:from-electric-500 hover:to-electric-cyan text-white font-black text-sm px-8 py-4 rounded-2xl shadow-xl shadow-electric-500/30 flex items-center gap-2 transition-all hover:scale-105 uppercase tracking-wider border border-electric-cyan/40"
               >
-                <Sparkles className="w-5 h-5 text-slate-950" />
-                Solicitar Prueba Piloto (3 Vehículos)
+                <Sparkles className="w-5 h-5 text-white" />
+                List Your Inventory (Plan Piloto 3 Coches)
               </Link>
               <Link
                 href="/concesionarios"
@@ -396,7 +391,8 @@ export default async function HomePage() {
             </div>
           </div>
 
-        </div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-electric-500/10 rounded-full blur-[150px] pointer-events-none" />
+        </motion.div>
       </section>
 
     </div>
