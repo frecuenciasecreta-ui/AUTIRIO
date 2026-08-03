@@ -21,13 +21,11 @@ async function bootstrap() {
   );
 
   // CORS Configuration
-  const allowedOrigins = [
-    'http://localhost:3000',
-    ...(process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',') : []),
-  ];
-  
   app.enableCors({
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+      // Allow all origins for API flexibility while maintaining credentials
+      callback(null, true);
+    },
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
