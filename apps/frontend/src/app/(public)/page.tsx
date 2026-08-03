@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import HeroSearch from '@/components/public/HeroSearch';
 import HeroShowcase from '@/components/public/HeroShowcase';
 import CarCard from '@/components/public/CarCard';
@@ -91,7 +92,7 @@ export default async function HomePage() {
   const featuredCars = await getFeaturedVehicles();
 
   return (
-    <div className="space-y-20 pb-20">
+    <div className="space-y-24 pb-20 bg-[#050507]">
       
       {/* HERO SHOWCASE PRESENTATION BANNER */}
       <HeroShowcase />
@@ -115,71 +116,177 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* IMPERIUM ECOSYSTEM SHOWCASE SECTION (3 PILLARS) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      {/* ORGANIC SECTION DIVIDER */}
+      <div className="relative max-w-7xl mx-auto my-12 pointer-events-none">
+        <div className="h-px bg-gradient-to-r from-transparent via-gold-500/30 to-transparent w-full" />
+        <div className="absolute left-1/2 -translate-x-1/2 -top-3 px-4 bg-[#050507]">
+          <div className="w-6 h-6 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center">
+            <Sparkles className="w-3 h-3 text-gold-400" />
+          </div>
+        </div>
+      </div>
+
+      {/* IMPERIUM ECOSYSTEM CHESS LAYOUT (FORMATO AJEDREZ DE ALTO IMPACTO) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 py-6">
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-brand-accent block">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-gold-400 block">
             Infraestructura Comercial Externa para Concesionarios
           </span>
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
             El Ecosistema IMPERIUM Auto Digital
           </h2>
           <p className="text-sm sm:text-base text-slate-400 leading-relaxed font-medium">
-            Integramos tres capas especializadas para acelerar la rotación de inventarios manteniendo intacto el importe neto del concesionario.
+            Tres capas especializadas de marketing audiovisual y comercialización para acelerar la rotación de tu inventario.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* CHESS ITEM 1: IMPERIUM MEDIA (Media a la izquierda, Texto a la derecha) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
-          {/* Pillar 1: IMPERIUM Media */}
-          <div className="glass-panel p-8 rounded-3xl border border-slate-800/80 space-y-5 bg-gradient-to-b from-slate-900/80 to-slate-950 hover:border-brand-accent/50 transition-all hover:scale-[1.02] shadow-xl">
-            <div className="w-12 h-12 rounded-2xl bg-brand-accent/15 border border-brand-accent/30 flex items-center justify-center text-brand-accent">
-              <Video className="w-6 h-6" />
+          <div className="lg:col-span-6 relative h-72 sm:h-96 rounded-3xl overflow-hidden border border-gold-500/20 bg-slate-950 shadow-2xl group">
+            <Image
+              src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=1000&q=80"
+              alt="IMPERIUM Media Producción 4K"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
+              <span className="bg-gold-500/20 backdrop-blur-md border border-gold-500/40 text-gold-300 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider">
+                🎥 Producción 4K & Reels
+              </span>
+              <div className="w-10 h-10 rounded-full bg-slate-900/90 border border-slate-700 flex items-center justify-center text-gold-400">
+                <PlayCircle className="w-5 h-5" />
+              </div>
             </div>
-            <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-accent block">Capa 01</span>
-            <h3 className="text-xl font-black text-white">IMPERIUM Media</h3>
-            <p className="text-xs text-slate-300 leading-relaxed">
-              Producción audiovisual 4K de alta calidad, Reels verticales, vídeos sin presentador, fotografía de detalle y guiones diseñados para destacar en redes.
-            </p>
-            <ul className="text-xs text-slate-400 space-y-2 pt-2">
-              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Fotografías de Estudio y Detalle</li>
-              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Vídeos Verticales para Reels & TikTok</li>
-            </ul>
           </div>
 
-          {/* Pillar 2: IMPERIUM Performance */}
-          <div className="glass-panel p-8 rounded-3xl border border-slate-800/80 space-y-5 bg-gradient-to-b from-slate-900/80 to-slate-950 hover:border-emerald-500/50 transition-all hover:scale-[1.02] shadow-xl">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-              <Target className="w-6 h-6" />
+          <div className="lg:col-span-6 space-y-6 lg:pl-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-bold uppercase tracking-wider">
+              Capa 01 • Producción Audiovisual
             </div>
-            <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 block">Capa 02</span>
-            <h3 className="text-xl font-black text-white">IMPERIUM Performance</h3>
-            <p className="text-xs text-slate-300 leading-relaxed">
-              Campañas de publicidad digital segmentadas en Google Ads, Meta Ads (Instagram/Facebook) y retargeting activo para captar compradores de alta capacidad.
+            <h3 className="text-3xl font-black text-white leading-tight">
+              IMPERIUM Media
+            </h3>
+            <p className="text-sm text-slate-300 leading-relaxed font-medium">
+              Transformamos vehículos estáticos en piezas de deseo. Producimos vídeos en calidad 4K, Reels verticales optimizados para TikTok e Instagram, fotografías de detalle y guiones orientados a la venta.
             </p>
-            <ul className="text-xs text-slate-400 space-y-2 pt-2">
-              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Publicidad Segmentada en España</li>
-              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Captación de Compradores Cualificados</li>
-            </ul>
-          </div>
 
-          {/* Pillar 3: IMPERIUM Commerce */}
-          <div className="glass-panel p-8 rounded-3xl border border-slate-800/80 space-y-5 bg-gradient-to-b from-slate-900/80 to-slate-950 hover:border-amber-500/50 transition-all hover:scale-[1.02] shadow-xl">
-            <div className="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400">
-              <Rocket className="w-6 h-6" />
-            </div>
-            <span className="text-[10px] font-extrabold uppercase tracking-widest text-amber-400 block">Capa 03</span>
-            <h3 className="text-xl font-black text-white">IMPERIUM Commerce</h3>
-            <p className="text-xs text-slate-300 leading-relaxed">
-              Gestión comercial inicial de las consultas, filtrado de presupuestos, confirmación de formas de pago y coordinación directa de citas con el concesionario.
-            </p>
-            <ul className="text-xs text-slate-400 space-y-2 pt-2">
-              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Importe Neto 100% Protegido</li>
-              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Prueba Piloto de 45 Días sin Riesgo</li>
+            <ul className="space-y-2.5 text-xs text-slate-300 font-medium">
+              <li className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-gold-400 flex-shrink-0" /> Fotografías de Estudio y Detalle Técnico</li>
+              <li className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-gold-400 flex-shrink-0" /> Vídeos Verticales de Alta Tasa de Retención</li>
+              <li className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-gold-400 flex-shrink-0" /> Guiones sin Presentador Orientados a Convertir</li>
             </ul>
+
+            <div className="pt-2">
+              <Link
+                href="/publica-con-nosotros"
+                className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-slate-950 bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 px-6 py-3.5 rounded-xl shadow-lg shadow-gold-500/20 hover:scale-105 transition-all"
+              >
+                Solicitar Muestra de Vídeo Gratuita
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
 
         </div>
+
+        {/* CHESS ITEM 2: IMPERIUM PERFORMANCE (Texto a la izquierda, Media a la derecha) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pt-8">
+          
+          <div className="lg:col-span-6 space-y-6 lg:pr-6 order-2 lg:order-1">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+              Capa 02 • Captación Digital
+            </div>
+            <h3 className="text-3xl font-black text-white leading-tight">
+              IMPERIUM Performance
+            </h3>
+            <p className="text-sm text-slate-300 leading-relaxed font-medium">
+              Desplegamos campañas de publicidad altamente segmentadas en Google Ads y Meta Ads para alcanzar compradores de alto poder adquisitivo en España en búsqueda activa de vehículos.
+            </p>
+
+            <ul className="space-y-2.5 text-xs text-slate-300 font-medium">
+              <li className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" /> Segmentación Geográfica y Socioeconómica</li>
+              <li className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" /> Retargeting Continuo de Compradores Cualificados</li>
+              <li className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" /> Medición en Tiempo Real de Leads Generados</li>
+            </ul>
+
+            <div className="pt-2">
+              <Link
+                href="/publica-con-nosotros"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-200 bg-slate-900 border border-slate-700 hover:border-emerald-500 px-6 py-3.5 rounded-xl transition-all"
+              >
+                Ver Estrategia de Captación
+                <ChevronRight className="w-4 h-4 text-emerald-400" />
+              </Link>
+            </div>
+          </div>
+
+          <div className="lg:col-span-6 relative h-72 sm:h-96 rounded-3xl overflow-hidden border border-emerald-500/20 bg-slate-950 shadow-2xl group order-1 lg:order-2">
+            <Image
+              src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=1000&q=80"
+              alt="IMPERIUM Performance Ads"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
+              <span className="bg-emerald-500/20 backdrop-blur-md border border-emerald-500/40 text-emerald-300 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider">
+                🎯 Campañas Google & Meta Ads
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+        {/* CHESS ITEM 3: IMPERIUM COMMERCE (Media a la izquierda, Texto a la derecha) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pt-8">
+          
+          <div className="lg:col-span-6 relative h-72 sm:h-96 rounded-3xl overflow-hidden border border-gold-500/20 bg-slate-950 shadow-2xl group">
+            <Image
+              src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=1000&q=80"
+              alt="IMPERIUM Commerce Plan Piloto"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
+              <span className="bg-gold-500/20 backdrop-blur-md border border-gold-500/40 text-gold-300 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider">
+                🚀 Prueba Piloto 45 Días sin Riesgo
+              </span>
+            </div>
+          </div>
+
+          <div className="lg:col-span-6 space-y-6 lg:pl-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-bold uppercase tracking-wider">
+              Capa 03 • Gestión Comercial
+            </div>
+            <h3 className="text-3xl font-black text-white leading-tight">
+              IMPERIUM Commerce
+            </h3>
+            <p className="text-sm text-slate-300 leading-relaxed font-medium">
+              Gestión inicial de consultas, filtrado de presupuestos y coordinación de citas. Operamos bajo el modelo de <strong>Importe Neto Protegido</strong>: el concesionario fija lo que necesita recibir y nuestro honorario se suma dentro del precio público.
+            </p>
+
+            <ul className="space-y-2.5 text-xs text-slate-300 font-medium">
+              <li className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-gold-400 flex-shrink-0" /> Prueba Piloto con 3 Vehículos por 45 Días</li>
+              <li className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-gold-400 flex-shrink-0" /> Cero Coste de Fijo Mensual</li>
+              <li className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-gold-400 flex-shrink-0" /> Compradores Filtrados y Citas Agendadas</li>
+            </ul>
+
+            <div className="pt-2">
+              <Link
+                href="/publica-con-nosotros"
+                className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-slate-950 bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 px-6 py-3.5 rounded-xl shadow-lg shadow-gold-500/20 hover:scale-105 transition-all"
+              >
+                Solicitar Prueba Piloto 3 Vehículos
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+
+        </div>
+
       </section>
 
       {/* AD BANNER HERO SLOT */}
@@ -191,13 +298,13 @@ export default async function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 border-b border-slate-800 pb-5">
           <div>
-            <span className="text-xs font-extrabold uppercase tracking-widest text-brand-accent block mb-1">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-gold-400 block mb-1">
               Selección Certificada
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-white">Inventario en Exposición</h2>
           </div>
 
-          <Link href="/coches" className="text-sm font-bold text-brand-accent hover:text-blue-400 flex items-center gap-1">
+          <Link href="/coches" className="text-sm font-bold text-gold-400 hover:text-gold-300 flex items-center gap-1">
             Ver Todos los Coches ({featuredCars.length}+)
             <ArrowRight className="w-4 h-4" />
           </Link>
@@ -210,14 +317,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* AD BANNER MIDDLE SLOT */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <AdBannerSlot placementCode="HOME_MIDDLE" />
-      </div>
-
       {/* DGT ECO LABELS BANNER IN SPAIN */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="glass-panel p-8 sm:p-12 rounded-3xl border border-slate-800 relative overflow-hidden">
+        <div className="glass-panel p-8 sm:p-12 rounded-3xl border border-gold-500/20 relative overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             
             <div className="space-y-4">
@@ -240,7 +342,7 @@ export default async function HomePage() {
 
             <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 space-y-4 text-xs">
               <div className="flex items-center gap-3">
-                <ShieldCheck className="w-6 h-6 text-brand-accent flex-shrink-0" />
+                <ShieldCheck className="w-6 h-6 text-gold-400 flex-shrink-0" />
                 <div>
                   <h4 className="font-bold text-white">Etiqueta CERO Emisiones</h4>
                   <p className="text-slate-400">Aparcamiento gratuito en zona SER y acceso total a ZBE sin restricciones.</p>
@@ -261,10 +363,10 @@ export default async function HomePage() {
 
       {/* B2B CONCESIONARIOS PILOT PROGRAM HIGH-CONVERSION BANNER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 border border-brand-accent/40 p-8 sm:p-14 shadow-2xl">
+        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-slate-950 via-slate-900 to-[#0A0E17] border border-gold-500/40 p-8 sm:p-14 shadow-2xl">
           
           <div className="max-w-2xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/20 border border-brand-accent/30 text-brand-accent text-xs font-bold">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-bold">
               <Building2 className="w-4 h-4" />
               Exclusivo para Concesionarios en España
             </div>
@@ -280,9 +382,9 @@ export default async function HomePage() {
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <Link
                 href="/publica-con-nosotros"
-                className="bg-brand-accent hover:bg-blue-600 text-white font-black text-sm px-8 py-4 rounded-2xl shadow-xl shadow-blue-600/30 flex items-center gap-2 transition-all hover:scale-105 uppercase tracking-wider"
+                className="bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 hover:from-gold-500 hover:to-gold-600 text-slate-950 font-black text-sm px-8 py-4 rounded-2xl shadow-xl shadow-gold-500/20 flex items-center gap-2 transition-all hover:scale-105 uppercase tracking-wider"
               >
-                <Sparkles className="w-5 h-5 text-amber-400" />
+                <Sparkles className="w-5 h-5 text-slate-950" />
                 Solicitar Prueba Piloto (3 Vehículos)
               </Link>
               <Link
