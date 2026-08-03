@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ChevronLeft, ChevronRight, ShieldCheck, Sparkles, ArrowRight, 
-  Gauge, Calendar, Zap, Rocket, Video, TrendingUp, Target, CheckCircle2 
+  Gauge, Calendar, Zap, Rocket, Video, Target 
 } from 'lucide-react';
 
 interface ShowcaseCar {
@@ -108,12 +108,12 @@ export default function HeroShowcase() {
   };
 
   return (
-    <section className="relative w-full overflow-hidden pt-20 pb-16 lg:pt-28 lg:pb-24 border-b border-slate-800/80 bg-[#07090D]">
+    <section className="relative w-full overflow-hidden pt-20 pb-16 lg:pt-24 lg:pb-20 border-b border-gold-500/20 bg-[#050507]">
       
-      {/* Background Glows */}
+      {/* Background Champagne Glows */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[750px] h-[380px] bg-brand-accent/15 rounded-full blur-[140px]" />
-        <div className="absolute top-1/3 right-10 w-[450px] h-[320px] bg-indigo-500/10 rounded-full blur-[130px]" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[750px] h-[380px] bg-gold-500/10 rounded-full blur-[150px]" />
+        <div className="absolute top-1/3 right-10 w-[450px] h-[320px] bg-amber-500/10 rounded-full blur-[130px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -121,44 +121,44 @@ export default function HeroShowcase() {
         {/* BRAND POSITIONING BANNER */}
         <div className="text-center space-y-5 max-w-4xl mx-auto mb-12">
           
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 text-xs font-bold text-slate-200 shadow-xl">
-            <Rocket className="w-4 h-4 text-amber-400 animate-pulse" />
-            <span>Sistema de Marketing & Comercialización Automotriz B2B + B2C</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-gold-500/30 text-xs font-bold text-slate-200 shadow-xl">
+            <Rocket className="w-4 h-4 text-gold-500 animate-pulse" />
+            <span className="text-gold-400">Sistema de Marketing & Comercialización Automotriz B2B + B2C</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
             No Vendemos Coches. <br />
-            <span className="bg-gradient-to-r from-white via-slate-100 to-brand-accent bg-clip-text text-transparent">
+            <span className="gold-gradient-text">
               Creamos Sistemas para que tu Inventario se Venda Mejor.
             </span>
           </h1>
 
           <p className="text-sm sm:text-base text-slate-300 font-medium max-w-3xl mx-auto leading-relaxed">
-            Combinamos producción audiovisual 4K, campañas de publicidad digital y gestión comercial para concesionarios en España. <strong className="text-emerald-400">Importe neto protegido para el concesionario.</strong>
+            Combinamos producción audiovisual 4K, campañas de publicidad digital y gestión comercial para concesionarios en España. <strong className="text-gold-400">Importe neto protegido para el concesionario.</strong>
           </p>
 
           {/* DUAL ACTION BUTTONS FOR B2B DEALER & B2C BUYER */}
           <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/publica-con-nosotros"
-              className="bg-brand-accent hover:bg-blue-600 text-white font-extrabold text-xs px-6 py-4 rounded-2xl shadow-xl shadow-blue-600/30 flex items-center gap-2.5 transition-all hover:scale-105 uppercase tracking-wider"
+              className="bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 hover:from-gold-500 hover:to-gold-600 text-slate-950 font-black text-xs px-7 py-4 rounded-2xl shadow-xl shadow-gold-500/20 flex items-center gap-2.5 transition-all hover:scale-105 uppercase tracking-wider"
             >
-              <Sparkles className="w-4 h-4 text-amber-400" />
+              <Sparkles className="w-4 h-4 text-slate-950" />
               Solicitar Plan Piloto Concesionarios (3 Coches - 45 Días)
             </Link>
 
             <Link
               href="/coches"
-              className="bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white font-bold text-xs px-6 py-4 rounded-2xl border border-slate-700/80 flex items-center gap-2 transition-all hover:scale-105 uppercase tracking-wider"
+              className="bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-bold text-xs px-6 py-4 rounded-2xl border border-slate-700/80 flex items-center gap-2 transition-all hover:scale-105 uppercase tracking-wider"
             >
               Ver Catálogo de Selección
-              <ArrowRight className="w-4 h-4 text-brand-accent" />
+              <ArrowRight className="w-4 h-4 text-gold-500" />
             </Link>
           </div>
         </div>
 
         {/* HERO SHOWCASE CAROUSEL */}
-        <div className="relative glass-panel rounded-3xl border border-slate-800/80 overflow-hidden shadow-2xl p-6 sm:p-10 lg:p-12">
+        <div className="relative glass-panel rounded-3xl border border-gold-500/20 overflow-hidden shadow-2xl p-6 sm:p-10 lg:p-12">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
@@ -175,7 +175,7 @@ export default function HeroShowcase() {
                   className="space-y-4"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="bg-brand-accent/20 border border-brand-accent/40 text-brand-accent text-[11px] uppercase font-extrabold px-3 py-1 rounded-md">
+                    <span className="bg-gold-500/10 border border-gold-500/40 text-gold-400 text-[11px] uppercase font-extrabold px-3 py-1 rounded-md">
                       {currentCar.badge}
                     </span>
                     <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
@@ -194,13 +194,13 @@ export default function HeroShowcase() {
                   {/* Specs Quick Pills */}
                   <div className="grid grid-cols-3 gap-3 pt-2">
                     <div className="bg-slate-900/90 border border-slate-800 p-3 rounded-xl text-center">
-                      <Calendar className="w-4 h-4 text-brand-accent mx-auto mb-1" />
+                      <Calendar className="w-4 h-4 text-gold-500 mx-auto mb-1" />
                       <span className="text-[10px] text-slate-400 block uppercase font-bold">Año</span>
                       <span className="text-xs font-bold text-white">{currentCar.year}</span>
                     </div>
 
                     <div className="bg-slate-900/90 border border-slate-800 p-3 rounded-xl text-center">
-                      <Gauge className="w-4 h-4 text-brand-accent mx-auto mb-1" />
+                      <Gauge className="w-4 h-4 text-gold-500 mx-auto mb-1" />
                       <span className="text-[10px] text-slate-400 block uppercase font-bold">KM</span>
                       <span className="text-xs font-bold text-white">{currentCar.km}</span>
                     </div>
@@ -215,12 +215,12 @@ export default function HeroShowcase() {
                   <div className="pt-4 flex flex-wrap items-center gap-4">
                     <div>
                       <span className="text-[10px] uppercase font-bold text-slate-400 block">Precio Certificado</span>
-                      <span className="text-3xl font-black text-white">{currentCar.price}</span>
+                      <span className="text-3xl font-black gold-gradient-text">{currentCar.price}</span>
                     </div>
 
                     <Link
                       href={`/coches/${currentCar.slug}`}
-                      className="ml-auto bg-brand-accent hover:bg-blue-600 text-white font-bold text-xs px-6 py-3.5 rounded-xl shadow-lg shadow-blue-600/30 flex items-center gap-2 transition-all hover:scale-105"
+                      className="ml-auto bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 text-slate-950 font-extrabold text-xs px-6 py-3.5 rounded-xl shadow-lg shadow-gold-500/20 flex items-center gap-2 transition-all hover:scale-105"
                     >
                       Ver Ficha y Vídeo
                       <ArrowRight className="w-4 h-4" />
@@ -261,14 +261,14 @@ export default function HeroShowcase() {
               <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2">
                 <button
                   onClick={handlePrev}
-                  className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white hover:bg-brand-accent transition-colors shadow-lg"
+                  className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white hover:bg-gold-500 hover:text-slate-950 transition-colors shadow-lg"
                   aria-label="Anterior"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
                 <button
                   onClick={handleNext}
-                  className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white hover:bg-brand-accent transition-colors shadow-lg"
+                  className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white hover:bg-gold-500 hover:text-slate-950 transition-colors shadow-lg"
                   aria-label="Siguiente"
                 >
                   <ChevronRight className="w-4 h-4" />
@@ -285,7 +285,7 @@ export default function HeroShowcase() {
                       setCurrentIndex(idx);
                     }}
                     className={`h-1.5 rounded-full transition-all duration-300 ${
-                      idx === currentIndex ? 'w-8 bg-brand-accent' : 'w-2 bg-slate-700'
+                      idx === currentIndex ? 'w-8 bg-gold-500' : 'w-2 bg-slate-700'
                     }`}
                   />
                 ))}

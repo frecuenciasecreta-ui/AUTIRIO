@@ -3,35 +3,52 @@
 @tailwind utilities;
 
 :root {
-  --background: #090b0e;
+  --background: #050507;
   --foreground: #f8fafc;
 }
 
 body {
-  background-color: #090b0e !important;
+  background-color: #050507 !important;
   color: #f8fafc !important;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   margin: 0;
   padding: 0;
 }
 
+/* Luxury Champagne Gold & Metallic Silver Text Gradients */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #FFF2C6 0%, #D4AF37 50%, #C5A059 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.silver-gradient-text {
+  background: linear-gradient(135deg, #FFFFFF 0%, #CBD5E1 50%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* Glassmorphism Luxury Utilities */
 .glass-panel {
-  background: rgba(18, 22, 31, 0.85);
+  background: rgba(13, 15, 23, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.15);
 }
 
 .glass-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(212, 175, 55, 0.02) 100%);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.15);
 }
 
 .glass-card:hover {
-  border-color: rgba(0, 102, 255, 0.4);
-  box-shadow: 0 8px 32px 0 rgba(0, 102, 255, 0.15);
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(212, 175, 55, 0.15);
+}
+
+.gold-glow {
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
 }
 
 .badge-dgt-cero {
@@ -77,14 +94,14 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #090b0e;
+  background: #050507;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #212736;
+  background: #1E2333;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0066ff;
+  background: #D4AF37;
 }
