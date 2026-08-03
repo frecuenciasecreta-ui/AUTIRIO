@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import HeroSearch from '@/components/public/HeroSearch';
+import HeroShowcase from '@/components/public/HeroShowcase';
 import CarCard from '@/components/public/CarCard';
 import DgtBadge from '@/components/public/DgtBadge';
 import AdBannerSlot from '@/components/ads/AdBannerSlot';
@@ -85,61 +86,27 @@ export default async function HomePage() {
   return (
     <div className="space-y-20 pb-20">
       
-      {/* HERO SECTION with Autirio Ambiance */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden border-b border-slate-800/50">
-        
-        {/* Abstract Background Gradients & Autirio Watermark */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          {/* Subtle glow blobs */}
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px]"></div>
-          <div className="absolute top-[20%] right-[-10%] w-[30%] h-[30%] bg-indigo-500/10 rounded-full blur-[100px]"></div>
-          
-          {/* Massive Autirio Watermark */}
-          <div className="absolute top-[10%] right-[-20%] lg:right-[5%] opacity-[0.03] transform rotate-12 scale-150 pointer-events-none">
-            <AutirioLogo variant="icon" className="w-[800px] h-[800px] text-brand-accent" />
-          </div>
-        </div>
+      {/* HERO SHOWCASE PRESENTATION BANNER (CARMAX STYLE) */}
+      <HeroShowcase />
 
-        <div className="relative z-10 text-center space-y-6 max-w-3xl mx-auto mb-12 px-4 sm:px-6 lg:px-8">
-          
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 text-xs font-semibold text-slate-300 shadow-md">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            Catálogo Administrado • Vehículos 100% Verificados en España
-          </div>
-
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white leading-tight">
-            La Excelencia del Motor <br />
-            <span className="bg-gradient-to-r from-white via-slate-200 to-brand-accent bg-clip-text text-transparent">
-              Selección Certificada
-            </span>
-          </h1>
-
-          <p className="text-base sm:text-lg text-slate-400 font-normal leading-relaxed">
-            Descubre los mejores deportivos y coches de gama alta de concesionarios oficiales y colaboradores en toda España.
-          </p>
-
-        </div>
-
-        {/* Hero Search Box */}
-        <div className="relative max-w-5xl mx-auto">
-          <HeroSearch />
-        </div>
+      {/* QUICK SEARCH BAR SECTION */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20">
+        <HeroSearch />
 
         {/* Popular Brand Pills */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs text-slate-400">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-2.5 text-xs text-slate-400">
           <span className="font-semibold text-slate-300">Marcas populares:</span>
           {['Porsche', 'BMW', 'Mercedes-Benz', 'Tesla', 'Audi', 'Ferrari'].map((b) => (
             <Link
               key={b}
               href={`/coches?search=${b}`}
-              className="bg-slate-900/80 hover:bg-slate-800 hover:text-white px-3 py-1.5 rounded-lg border border-slate-800 transition-colors"
+              className="bg-slate-900/90 hover:bg-slate-800 hover:text-white px-3 py-1.5 rounded-lg border border-slate-800 transition-colors"
             >
               {b}
             </Link>
           ))}
         </div>
-
-      </section>
+      </div>
 
       {/* AD BANNER HERO SLOT */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
