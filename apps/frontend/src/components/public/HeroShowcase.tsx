@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ChevronLeft, ChevronRight, ShieldCheck, Sparkles, ArrowRight, 
-  Gauge, Calendar, Zap, Rocket, Video, Target, Play 
+  Gauge, Calendar, Zap, Rocket, Video, Play, CheckCircle2, ChevronDown 
 } from 'lucide-react';
 
 interface ShowcaseCar {
@@ -21,6 +21,7 @@ interface ShowcaseCar {
   imageUrl: string;
   slug: string;
   badge: string;
+  accel: string;
 }
 
 const SHOWCASE_CARS: ShowcaseCar[] = [
@@ -28,11 +29,12 @@ const SHOWCASE_CARS: ShowcaseCar[] = [
     id: '1',
     brand: 'BMW',
     model: 'M4 Competition Coupé',
-    tagline: 'Vídeo 4K Generado con IA en Atardecer Épico & Paquete Aerodinámico',
+    tagline: 'Superdeportivo 510CV con Tratamiento Cerámico y Vídeo 4K',
     price: '108.500 €',
     year: 2024,
     km: '11.500 km',
     hp: 510,
+    accel: '3.9s 0-100',
     imageUrl: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=1200&q=80',
     slug: 'bmw-m4-competition-2023',
     badge: '🚀 Vídeo 4K IA Activo',
@@ -41,30 +43,18 @@ const SHOWCASE_CARS: ShowcaseCar[] = [
     id: '2',
     brand: 'PORSCHE',
     model: '911 Carrera GTS PDK',
-    tagline: 'Deportivo Pura Sangre con Tratamiento Cerámico y Vídeo 4K',
+    tagline: 'Deportivo Pura Sangre con Paquete Sport Chrono',
     price: '189.900 €',
     year: 2024,
     km: '8.500 km',
     hp: 480,
+    accel: '3.4s 0-100',
     imageUrl: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=1200&q=80',
     slug: 'porsche-911-carrera-gts-2024-madrid',
     badge: 'Etiqueta C DGT',
   },
   {
     id: '3',
-    brand: 'MERCEDES-BENZ',
-    model: 'AMG GT R Coupe',
-    tagline: 'V8 Biturbo 585CV Vértigo y Exclusividad Comercializada',
-    price: '195.000 €',
-    year: 2023,
-    km: '12.000 km',
-    hp: 585,
-    imageUrl: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=1200&q=80',
-    slug: 'mercedes-amg-gt-r-2023',
-    badge: 'Edición Selección',
-  },
-  {
-    id: '4',
     brand: 'PORSCHE',
     model: 'Taycan Turbo S 761CV',
     tagline: 'Tecnología 100% Eléctrica 761CV de Aceleración',
@@ -72,6 +62,7 @@ const SHOWCASE_CARS: ShowcaseCar[] = [
     year: 2023,
     km: '14.200 km',
     hp: 761,
+    accel: '2.8s 0-100',
     imageUrl: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=1200&q=80',
     slug: 'porsche-taycan-turbo-s-2023-barcelona',
     badge: 'Etiqueta CERO DGT',
@@ -79,237 +70,131 @@ const SHOWCASE_CARS: ShowcaseCar[] = [
 ];
 
 export default function HeroShowcase() {
-  const [mounted, setMounted] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!isAutoPlaying || !mounted) return;
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % SHOWCASE_CARS.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, mounted]);
 
   const currentCar = SHOWCASE_CARS[currentIndex];
 
-  const handleNext = () => {
-    setIsAutoPlaying(false);
-    setCurrentIndex((prev) => (prev + 1) % SHOWCASE_CARS.length);
-  };
-
-  const handlePrev = () => {
-    setIsAutoPlaying(false);
-    setCurrentIndex((prev) => (prev - 1 + SHOWCASE_CARS.length) % SHOWCASE_CARS.length);
-  };
-
   return (
-    <section className="relative w-full overflow-hidden pt-20 pb-16 lg:pt-24 lg:pb-20 border-b border-gold-500/20 bg-[#050507]">
+    <section className="relative min-h-screen w-full overflow-hidden flex flex-col justify-between pt-24 pb-12 bg-[#040508]">
       
-      {/* Background Champagne & Gold Glows */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[750px] h-[380px] bg-gold-500/10 rounded-full blur-[150px]" />
-        <div className="absolute top-1/3 right-10 w-[450px] h-[320px] bg-amber-500/10 rounded-full blur-[130px]" />
+      {/* FULLSCREEN BACKGROUND VIDEO WITH SMOOTH GRADIENT OVERLAYS */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover scale-105 filter brightness-90 contrast-105 transition-all duration-1000"
+          src="/hero-video.mp4"
+        />
+        {/* Dark Vignette Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#040508] via-[#040508]/60 to-[#040508]/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#040508]/90 via-[#040508]/40 to-[#040508]/90" />
+        
+        {/* Animated Glow Spotlights */}
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[350px] bg-electric-500/15 rounded-full blur-[160px] animate-glow-pulse" />
+        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[300px] bg-gold-500/10 rounded-full blur-[150px] animate-glow-pulse" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto space-y-12">
         
-        {/* BRAND POSITIONING BANNER */}
-        <div className="text-center space-y-5 max-w-4xl mx-auto mb-12">
-          
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-gold-500/30 text-xs font-bold text-slate-200 shadow-xl">
-            <Rocket className="w-4 h-4 text-gold-500 animate-pulse" />
-            <span className="text-gold-400">Sistema de Marketing & Comercialización Automotriz B2B + B2C</span>
+        {/* HERO TYPOGRAPHY & BRAND TAGLINE */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="text-center space-y-6 max-w-5xl mx-auto"
+        >
+          <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-slate-950/80 border border-electric-500/40 text-xs font-black tracking-widest uppercase text-electric-300 shadow-2xl backdrop-blur-md">
+            <Sparkles className="w-4 h-4 text-electric-cyan animate-pulse" />
+            <span>IMPERIUM Auto Digital • Sistema Comercial B2B + B2C</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
-            No Vendemos Coches. <br />
-            <span className="gold-gradient-text">
-              Creamos Sistemas para que tu Inventario se Venda Mejor.
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black text-white tracking-tight leading-none uppercase">
+            Redefining <br />
+            <span className="electric-gradient-text">
+              The Art of Driving
             </span>
           </h1>
 
-          <p className="text-sm sm:text-base text-slate-300 font-medium max-w-3xl mx-auto leading-relaxed">
-            Combinamos producción audiovisual 4K, campañas de publicidad digital y gestión comercial para concesionarios en España. <strong className="text-gold-400">Importe neto protegido para el concesionario.</strong>
+          <p className="text-base sm:text-xl text-slate-300 font-medium max-w-3xl mx-auto leading-relaxed">
+            Compra y venta gestionada de vehículos de alta gama y selección profesional en España. <strong className="text-gold-400">Importe neto protegido para el concesionario.</strong>
           </p>
 
-          {/* DUAL ACTION BUTTONS FOR B2B DEALER & B2C BUYER */}
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href="/publica-con-nosotros"
-              className="bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 hover:from-gold-500 hover:to-gold-600 text-slate-950 font-black text-xs px-7 py-4 rounded-2xl shadow-xl shadow-gold-500/20 flex items-center gap-2.5 transition-all hover:scale-105 uppercase tracking-wider"
-            >
-              <Sparkles className="w-4 h-4 text-slate-950" />
-              Solicitar Plan Piloto Concesionarios (3 Coches - 45 Días)
-            </Link>
-
+          {/* ANIMATED HIGH CONVERSION CTA BUTTONS */}
+          <div className="pt-4 flex flex-wrap items-center justify-center gap-5">
             <Link
               href="/coches"
-              className="bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-bold text-xs px-6 py-4 rounded-2xl border border-slate-700/80 flex items-center gap-2 transition-all hover:scale-105 uppercase tracking-wider"
+              className="group relative inline-flex items-center gap-3 px-8 py-4.5 rounded-2xl bg-gradient-to-r from-electric-600 via-electric-500 to-electric-cyan text-white font-black text-xs uppercase tracking-wider shadow-2xl shadow-electric-500/40 hover:scale-105 transition-all duration-300 border border-electric-cyan/40"
             >
-              Ver Catálogo de Selección
-              <ArrowRight className="w-4 h-4 text-gold-500" />
+              <span>Explorar Vehículos Certificados</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+
+            <Link
+              href="/publica-con-nosotros"
+              className="group inline-flex items-center gap-3 px-8 py-4.5 rounded-2xl bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 text-slate-950 font-black text-xs uppercase tracking-wider shadow-2xl shadow-gold-500/20 hover:scale-105 transition-all duration-300"
+            >
+              <Rocket className="w-4 h-4 text-slate-950" />
+              <span>Solicitar Plan Piloto Concesionarios</span>
             </Link>
           </div>
-        </div>
+        </motion.div>
 
-        {/* HERO SHOWCASE CAROUSEL WITH VIDEO BACKDROP */}
-        <div className="relative glass-panel rounded-3xl border border-gold-500/20 overflow-hidden shadow-2xl p-6 sm:p-10 lg:p-12">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        {/* FLOATING GLASSMORPHISM CAR SPEC TICKER (TESLA/PORSCHE STYLE) */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.2 }}
+          className="glass-card-electric p-6 sm:p-8 rounded-3xl max-w-5xl mx-auto shadow-2xl border border-electric-500/30"
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center items-center divide-x divide-slate-800/80">
             
-            {/* LEFT DETAILS COLUMN */}
-            <div className="lg:col-span-5 space-y-6">
-              
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentCar.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.4 }}
-                  className="space-y-4"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="bg-gold-500/10 border border-gold-500/40 text-gold-400 text-[11px] uppercase font-extrabold px-3 py-1 rounded-md">
-                      {currentCar.badge}
-                    </span>
-                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                      {currentCar.brand}
-                    </span>
-                  </div>
-
-                  <h2 className="text-3xl sm:text-4xl font-black text-white">
-                    {currentCar.model}
-                  </h2>
-
-                  <p className="text-sm text-slate-300 leading-relaxed font-medium">
-                    {currentCar.tagline}
-                  </p>
-
-                  {/* Specs Quick Pills */}
-                  <div className="grid grid-cols-3 gap-3 pt-2">
-                    <div className="bg-slate-900/90 border border-slate-800 p-3 rounded-xl text-center">
-                      <Calendar className="w-4 h-4 text-gold-500 mx-auto mb-1" />
-                      <span className="text-[10px] text-slate-400 block uppercase font-bold">Año</span>
-                      <span className="text-xs font-bold text-white">{currentCar.year}</span>
-                    </div>
-
-                    <div className="bg-slate-900/90 border border-slate-800 p-3 rounded-xl text-center">
-                      <Gauge className="w-4 h-4 text-gold-500 mx-auto mb-1" />
-                      <span className="text-[10px] text-slate-400 block uppercase font-bold">KM</span>
-                      <span className="text-xs font-bold text-white">{currentCar.km}</span>
-                    </div>
-
-                    <div className="bg-slate-900/90 border border-slate-800 p-3 rounded-xl text-center">
-                      <Zap className="w-4 h-4 text-amber-400 mx-auto mb-1" />
-                      <span className="text-[10px] text-slate-400 block uppercase font-bold">Potencia</span>
-                      <span className="text-xs font-bold text-white">{currentCar.hp} CV</span>
-                    </div>
-                  </div>
-
-                  <div className="pt-4 flex flex-wrap items-center gap-4">
-                    <div>
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block">Precio Certificado</span>
-                      <span className="text-3xl font-black gold-gradient-text">{currentCar.price}</span>
-                    </div>
-
-                    <Link
-                      href={`/coches/${currentCar.slug}`}
-                      className="ml-auto bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 text-slate-950 font-extrabold text-xs px-6 py-3.5 rounded-xl shadow-lg shadow-gold-500/20 flex items-center gap-2 transition-all hover:scale-105"
-                    >
-                      Ver Ficha y Vídeo
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
+            <div className="space-y-1">
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block">Modelo Destacado</span>
+              <div className="text-lg font-black text-white">{currentCar.brand} {currentCar.model}</div>
             </div>
 
-            {/* RIGHT PRESENTATION STAGE WITH REAL VIDEO LOOP */}
-            <div className="lg:col-span-7 relative h-72 sm:h-96 w-full rounded-2xl overflow-hidden bg-slate-950/80 border border-slate-800/80 flex items-center justify-center">
-              
-              {/* Studio Light Floor Effect */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-10 pointer-events-none" />
+            <div className="space-y-1 pl-4">
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block">Aceleración</span>
+              <div className="text-xl font-black text-electric-cyan">{currentCar.accel}</div>
+            </div>
 
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentCar.id}
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.5, ease: 'easeOut' }}
-                  className="relative w-full h-full"
-                >
-                  {/* REAL USER VIDEO LOOP OR IMAGE */}
-                  {currentCar.id === '1' ? (
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-cover"
-                      src="/hero-video.mp4"
-                    />
-                  ) : (
-                    <Image
-                      src={currentCar.imageUrl}
-                      alt={currentCar.model}
-                      fill
-                      priority
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 60vw"
-                    />
-                  )}
-                </motion.div>
-              </AnimatePresence>
+            <div className="space-y-1 pl-4">
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block">Potencia Máxima</span>
+              <div className="text-xl font-black text-amber-400">{currentCar.hp} CV</div>
+            </div>
 
-              {/* Navigation Controls */}
-              <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2">
-                <button
-                  onClick={handlePrev}
-                  className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white hover:bg-gold-500 hover:text-slate-950 transition-colors shadow-lg"
-                  aria-label="Anterior"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={handleNext}
-                  className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white hover:bg-gold-500 hover:text-slate-950 transition-colors shadow-lg"
-                  aria-label="Siguiente"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-
-              {/* Slide Indicators */}
-              <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2">
-                {SHOWCASE_CARS.map((car, idx) => (
-                  <button
-                    key={car.id}
-                    onClick={() => {
-                      setIsAutoPlaying(false);
-                      setCurrentIndex(idx);
-                    }}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      idx === currentIndex ? 'w-8 bg-gold-500' : 'w-2 bg-slate-700'
-                    }`}
-                  />
-                ))}
-              </div>
-
+            <div className="space-y-1 pl-4">
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block">Precio Certificado</span>
+              <div className="text-xl font-black gold-gradient-text">{currentCar.price}</div>
             </div>
 
           </div>
 
-        </div>
+          <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+            <span className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              Revisión técnica de 150 puntos y garantía oficial nacional
+            </span>
+            
+            <Link href={`/coches/${currentCar.slug}`} className="text-electric-cyan font-bold hover:underline flex items-center gap-1">
+              Ver Ficha Técnica
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </motion.div>
 
       </div>
+
+      {/* SCROLL DOWN INDICATOR */}
+      <div className="relative z-10 text-center pb-4 animate-bounce">
+        <span className="text-[10px] uppercase font-extrabold text-slate-400 tracking-widest block mb-1">
+          Desliza para Explorar
+        </span>
+        <ChevronDown className="w-5 h-5 text-electric-cyan mx-auto" />
+      </div>
+
     </section>
   );
 }

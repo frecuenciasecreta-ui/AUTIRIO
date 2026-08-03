@@ -7,9 +7,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#050507',
-        card: '#0D0F17',
-        border: '#1E2333',
+        background: '#040508',
+        card: '#0A0D14',
+        border: '#151926',
+        electric: {
+          300: '#7DD3FC',
+          400: '#38BDF8',
+          500: '#0066FF',
+          600: '#0052CC',
+          700: '#003D99',
+          cyan: '#00F0FF',
+        },
         gold: {
           300: '#FFF2C6',
           400: '#F3E5AB',
@@ -25,9 +33,9 @@ module.exports = {
           400: '#94A3B8',
         },
         brand: {
-          dark: '#050507',
-          accent: '#D4AF37',
-          gold: '#C5A059',
+          dark: '#040508',
+          accent: '#0066FF',
+          gold: '#D4AF37',
           silver: '#E2E8F0',
         },
         dgt: {
@@ -39,6 +47,20 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
+      },
+      keyframes: {
+        glowPulse: {
+          '0%, 100%': { opacity: 0.4, transform: 'scale(1)' },
+          '50%': { opacity: 0.8, transform: 'scale(1.05)' },
+        },
+        floatSlow: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+      },
+      animation: {
+        'glow-pulse': 'glowPulse 4s ease-in-out infinite',
+        'float-slow': 'floatSlow 6s ease-in-out infinite',
       },
     },
   },
