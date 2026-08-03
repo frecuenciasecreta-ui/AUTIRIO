@@ -52,7 +52,7 @@ export default function CarCard({ vehicle }: CarCardProps) {
           <span className="text-[11px] font-bold uppercase tracking-wider text-brand-accent mb-1 block">
             {vehicle.brand?.name} • {vehicle.model?.name}
           </span>
-          <Link href={`/coche/${vehicle.slug}`}>
+          <Link href={`/coches/${vehicle.slug}`}>
             <h3 className="text-base font-bold text-white group-hover:text-brand-accent transition-colors line-clamp-1">
               {vehicle.title}
             </h3>
@@ -78,7 +78,7 @@ export default function CarCard({ vehicle }: CarCardProps) {
         {/* Actions */}
         <div className="mt-5 pt-3 border-t border-slate-800/60 flex items-center justify-between gap-3">
           <Link
-            href={`/coche/${vehicle.slug}`}
+            href={`/coches/${vehicle.slug}`}
             className="flex-1 bg-slate-800/90 hover:bg-slate-700 text-white text-xs font-semibold py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 transition-colors"
           >
             Ver Detalles
