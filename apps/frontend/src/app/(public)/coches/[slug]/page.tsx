@@ -177,8 +177,8 @@ export default async function VehicleDetailPage({ params }: { params: { slug: st
     notFound();
   }
 
-  const formattedPrice = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(vehicle.price);
-  const formattedKm = new Intl.NumberFormat('es-ES').format(vehicle.kilometers);
+  const formattedPrice = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(vehicle?.price || 0);
+  const formattedKm = new Intl.NumberFormat('es-ES').format(vehicle?.kilometers || 0);
 
   // Schema.org Vehicle JSON-LD
   const jsonLd = {

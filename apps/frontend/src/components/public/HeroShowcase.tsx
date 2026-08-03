@@ -76,16 +76,21 @@ const SHOWCASE_CARS: ShowcaseCar[] = [
 ];
 
 export default function HeroShowcase() {
+  const [mounted, setMounted] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isAutoPlaying || !mounted) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % SHOWCASE_CARS.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [isAutoPlaying]);
+  }, [isAutoPlaying, mounted]);
 
   const currentCar = SHOWCASE_CARS[currentIndex];
 

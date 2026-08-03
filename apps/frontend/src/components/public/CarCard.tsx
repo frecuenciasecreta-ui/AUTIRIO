@@ -12,8 +12,8 @@ interface CarCardProps {
 export default function CarCard({ vehicle }: CarCardProps) {
   const mainImage = vehicle.images?.find((img) => img.isMain)?.url || vehicle.images?.[0]?.url || 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=800&q=80';
 
-  const formattedPrice = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(vehicle.price);
-  const formattedKm = new Intl.NumberFormat('es-ES').format(vehicle.kilometers);
+  const formattedPrice = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(vehicle?.price || 0);
+  const formattedKm = new Intl.NumberFormat('es-ES').format(vehicle?.kilometers || 0);
 
   const whatsappMessage = encodeURIComponent(`Hola, estoy interesado en el vehículo: ${vehicle.title} (${formattedPrice}) publicado en AutoMaestro.`);
 
