@@ -92,12 +92,12 @@ export default async function HomePage() {
   const featuredCars = await getFeaturedVehicles();
 
   return (
-    <div className="space-y-24 pb-20 bg-[#050507]">
+    <div className="space-y-24 pb-20 bg-[#040508]">
       
-      {/* HERO SHOWCASE PRESENTATION BANNER */}
+      {/* 1. HERO SHOWCASE PRESENTATION BANNER */}
       <HeroShowcase />
 
-      {/* QUICK SEARCH BAR SECTION */}
+      {/* 2. QUICK SEARCH BAR SECTION */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20">
         <HeroSearch />
 
@@ -116,17 +116,89 @@ export default async function HomePage() {
         </div>
       </div>
 
+      {/* 3. FEATURED VEHICLES CATALOG (MÁXIMA VISIBILIDAD DE VENTA DE COCHES DE PRIMERA MANO) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 border-b border-slate-800 pb-5">
+          <div>
+            <span className="text-xs font-black uppercase tracking-widest text-electric-cyan block mb-1">
+              Catálogo de Selección Certificado
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black text-white">Inventario en Exposición</h2>
+          </div>
+
+          <Link href="/coches" className="text-sm font-bold text-electric-cyan hover:text-white flex items-center gap-1.5 transition-colors">
+            Ver Todos los Coches ({featuredCars.length}+)
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredCars.map((car) => (
+            <CarCard key={car.id} vehicle={car} />
+          ))}
+        </div>
+      </section>
+
+      {/* AD BANNER HERO SLOT */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <AdBannerSlot placementCode="HOME_HERO" />
+      </div>
+
+      {/* 4. DGT ECO LABELS BANNER IN SPAIN */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="glass-card-electric p-8 sm:p-12 rounded-3xl border border-electric-500/20 relative overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            
+            <div className="space-y-4">
+              <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider block">
+                Zonas de Bajas Emisiones (ZBE España)
+              </span>
+              <h3 className="text-2xl sm:text-4xl font-black text-white leading-tight">
+                Circula sin Restricciones con Etiquetas DGT CERO y ECO
+              </h3>
+              <p className="text-sm text-slate-400 leading-relaxed font-medium">
+                Encuentra tu próximo vehículo 100% eléctrico o híbrido en Madrid, Barcelona, Valencia y principales ciudades.
+              </p>
+              
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <DgtBadge code="CERO" size="lg" />
+                <DgtBadge code="ECO" size="lg" />
+                <DgtBadge code="C" size="lg" />
+              </div>
+            </div>
+
+            <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 space-y-4 text-xs">
+              <div className="flex items-center gap-3">
+                <ShieldCheck className="w-6 h-6 text-electric-cyan flex-shrink-0" />
+                <div>
+                  <h4 className="font-bold text-white">Etiqueta CERO Emisiones</h4>
+                  <p className="text-slate-400">Aparcamiento gratuito en zona SER y acceso total a ZBE sin restricciones.</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <TrendingUp className="w-6 h-6 text-emerald-400 flex-shrink-0" />
+                <div>
+                  <h4 className="font-bold text-white">Etiqueta ECO</h4>
+                  <p className="text-slate-400">Descuentos en peajes e impuesto de circulación reducido hasta un 75%.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* ORGANIC SECTION DIVIDER */}
       <div className="relative max-w-7xl mx-auto my-12 pointer-events-none">
-        <div className="h-px bg-gradient-to-r from-transparent via-gold-500/30 to-transparent w-full" />
-        <div className="absolute left-1/2 -translate-x-1/2 -top-3 px-4 bg-[#050507]">
-          <div className="w-6 h-6 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center">
-            <Sparkles className="w-3 h-3 text-gold-400" />
+        <div className="h-px bg-gradient-to-r from-transparent via-electric-500/30 to-transparent w-full" />
+        <div className="absolute left-1/2 -translate-x-1/2 -top-3 px-4 bg-[#040508]">
+          <div className="w-6 h-6 rounded-full bg-electric-500/10 border border-electric-500/30 flex items-center justify-center">
+            <Sparkles className="w-3 h-3 text-electric-cyan" />
           </div>
         </div>
       </div>
 
-      {/* IMPERIUM ECOSYSTEM CHESS LAYOUT (FORMATO AJEDREZ DE ALTO IMPACTO) */}
+      {/* 5. IMPERIUM ECOSYSTEM CHESS LAYOUT (B2B INFRAESTRUCTURA DE CONCESIONARIOS AL FINAL DE LA PORTADA) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 py-6">
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <span className="text-xs font-extrabold uppercase tracking-widest text-gold-400 block">
@@ -289,79 +361,7 @@ export default async function HomePage() {
 
       </section>
 
-      {/* AD BANNER HERO SLOT */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <AdBannerSlot placementCode="HOME_HERO" />
-      </div>
-
-      {/* FEATURED VEHICLES CATALOG */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 border-b border-slate-800 pb-5">
-          <div>
-            <span className="text-xs font-extrabold uppercase tracking-widest text-gold-400 block mb-1">
-              Selección Certificada
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-white">Inventario en Exposición</h2>
-          </div>
-
-          <Link href="/coches" className="text-sm font-bold text-gold-400 hover:text-gold-300 flex items-center gap-1">
-            Ver Todos los Coches ({featuredCars.length}+)
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredCars.map((car) => (
-            <CarCard key={car.id} vehicle={car} />
-          ))}
-        </div>
-      </section>
-
-      {/* DGT ECO LABELS BANNER IN SPAIN */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="glass-panel p-8 sm:p-12 rounded-3xl border border-gold-500/20 relative overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            
-            <div className="space-y-4">
-              <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider block">
-                Zonas de Bajas Emisiones (ZBE España)
-              </span>
-              <h3 className="text-2xl sm:text-4xl font-black text-white leading-tight">
-                Circula sin Restricciones con Etiquetas DGT CERO y ECO
-              </h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Encuentra tu próximo vehículo 100% eléctrico o híbrido en Madrid, Barcelona, Valencia y principales ciudades.
-              </p>
-              
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <DgtBadge code="CERO" size="lg" />
-                <DgtBadge code="ECO" size="lg" />
-                <DgtBadge code="C" size="lg" />
-              </div>
-            </div>
-
-            <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 space-y-4 text-xs">
-              <div className="flex items-center gap-3">
-                <ShieldCheck className="w-6 h-6 text-gold-400 flex-shrink-0" />
-                <div>
-                  <h4 className="font-bold text-white">Etiqueta CERO Emisiones</h4>
-                  <p className="text-slate-400">Aparcamiento gratuito en zona SER y acceso total a ZBE sin restricciones.</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <TrendingUp className="w-6 h-6 text-emerald-400 flex-shrink-0" />
-                <div>
-                  <h4 className="font-bold text-white">Etiqueta ECO</h4>
-                  <p className="text-slate-400">Descuentos en peajes e impuesto de circulación reducido hasta un 75%.</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* B2B CONCESIONARIOS PILOT PROGRAM HIGH-CONVERSION BANNER */}
+      {/* 6. B2B CONCESIONARIOS PILOT PROGRAM HIGH-CONVERSION BANNER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-slate-950 via-slate-900 to-[#0A0E17] border border-gold-500/40 p-8 sm:p-14 shadow-2xl">
           
@@ -375,7 +375,7 @@ export default async function HomePage() {
               Activa una Prueba Piloto de 45 Días sin Riesgo
             </h2>
 
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-medium">
               Seleccionamos 3 vehículos de tu concesionario, acordamos el precio neto que necesitas recibir, producimos contenido profesional y generamos compradores. Si no vendemos, no pagas honorarios por éxito.
             </p>
 
