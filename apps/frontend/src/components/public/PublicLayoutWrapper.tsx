@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import Header from './Header';
 import Footer from './Footer';
 import CookieBanner from './CookieBanner';
+import FloatingWhatsAppButtons from './FloatingWhatsAppButtons';
 
 export default function PublicLayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -17,6 +18,7 @@ export default function PublicLayoutWrapper({ children }: { children: React.Reac
     <>
       <Header />
       <main className="flex-1">{children}</main>
+      <FloatingWhatsAppButtons />
       <CookieBanner />
       <Footer />
     </>
