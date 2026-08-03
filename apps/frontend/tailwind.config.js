@@ -9,15 +9,7 @@ module.exports = {
       colors: {
         background: '#040508',
         card: '#0A0D14',
-        border: '#151926',
-        electric: {
-          300: '#7DD3FC',
-          400: '#38BDF8',
-          500: '#0066FF',
-          600: '#0052CC',
-          700: '#003D99',
-          cyan: '#00F0FF',
-        },
+        border: '#1E2333',
         gold: {
           300: '#FFF2C6',
           400: '#F3E5AB',
@@ -34,8 +26,8 @@ module.exports = {
         },
         brand: {
           dark: '#040508',
-          accent: '#0066FF',
-          gold: '#D4AF37',
+          accent: '#D4AF37',
+          gold: '#C5A059',
           silver: '#E2E8F0',
         },
         dgt: {

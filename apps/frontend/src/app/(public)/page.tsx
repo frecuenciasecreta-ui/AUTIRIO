@@ -106,16 +106,16 @@ export default function HomePage() {
         </div>
       </motion.div>
 
-      {/* 3. FEATURES SECTION (ANIMATED ICON CARDS FROM PROMPT) */}
+      {/* 3. FEATURES SECTION (ANIMATED ICON CARDS IN GOLD & ONYX BLACK) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
           {/* Card 1: Verified Sellers */}
           <motion.div 
             whileHover={{ y: -6, scale: 1.02 }}
-            className="glass-card-electric p-8 rounded-3xl border border-white/10 space-y-4 shadow-xl"
+            className="glass-card-gold p-8 rounded-3xl border border-gold-500/20 space-y-4 shadow-xl"
           >
-            <div className="w-14 h-14 rounded-2xl bg-electric-500/20 border border-electric-500/30 flex items-center justify-center text-electric-cyan">
+            <div className="w-14 h-14 rounded-2xl bg-gold-500/20 border border-gold-500/30 flex items-center justify-center text-gold-400">
               <ShieldCheck className="w-7 h-7" />
             </div>
             <h3 className="text-xl font-black text-white">Verified Sellers</h3>
@@ -127,9 +127,9 @@ export default function HomePage() {
           {/* Card 2: Fast Transactions */}
           <motion.div 
             whileHover={{ y: -6, scale: 1.02 }}
-            className="glass-card-electric p-8 rounded-3xl border border-white/10 space-y-4 shadow-xl"
+            className="glass-card-gold p-8 rounded-3xl border border-gold-500/20 space-y-4 shadow-xl"
           >
-            <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+            <div className="w-14 h-14 rounded-2xl bg-gold-500/20 border border-gold-500/30 flex items-center justify-center text-gold-400">
               <Clock className="w-7 h-7" />
             </div>
             <h3 className="text-xl font-black text-white">Fast Transactions</h3>
@@ -141,7 +141,7 @@ export default function HomePage() {
           {/* Card 3: Secure Payments */}
           <motion.div 
             whileHover={{ y: -6, scale: 1.02 }}
-            className="glass-card-electric p-8 rounded-3xl border border-white/10 space-y-4 shadow-xl"
+            className="glass-card-gold p-8 rounded-3xl border border-gold-500/20 space-y-4 shadow-xl"
           >
             <div className="w-14 h-14 rounded-2xl bg-gold-500/20 border border-gold-500/30 flex items-center justify-center text-gold-400">
               <Lock className="w-7 h-7" />
@@ -159,13 +159,13 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 border-b border-slate-800 pb-5">
           <div>
-            <span className="text-xs font-black uppercase tracking-widest text-electric-cyan block mb-1">
+            <span className="text-xs font-black uppercase tracking-widest text-gold-400 block mb-1">
               Catálogo de Selección Certificado
             </span>
             <h2 className="text-3xl sm:text-4xl font-black text-white">Inventario en Exposición</h2>
           </div>
 
-          <Link href="/coches" className="text-sm font-bold text-electric-cyan hover:text-white flex items-center gap-1.5 transition-colors">
+          <Link href="/coches" className="text-sm font-bold text-gold-400 hover:text-white flex items-center gap-1.5 transition-colors">
             Ver Todos los Coches ({featuredCars.length}+)
             <ArrowRight className="w-4 h-4" />
           </Link>
@@ -185,7 +185,7 @@ export default function HomePage() {
 
       {/* 5. DGT ECO LABELS BANNER IN SPAIN */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="glass-card-electric p-8 sm:p-12 rounded-3xl border border-electric-500/20 relative overflow-hidden">
+        <div className="glass-card-gold p-8 sm:p-12 rounded-3xl border border-gold-500/20 relative overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             
             <div className="space-y-4">
@@ -208,7 +208,7 @@ export default function HomePage() {
 
             <div className="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 space-y-4 text-xs">
               <div className="flex items-center gap-3">
-                <ShieldCheck className="w-6 h-6 text-electric-cyan flex-shrink-0" />
+                <ShieldCheck className="w-6 h-6 text-gold-400 flex-shrink-0" />
                 <div>
                   <h4 className="font-bold text-white">Etiqueta CERO Emisiones</h4>
                   <p className="text-slate-400">Aparcamiento gratuito en zona SER y acceso total a ZBE sin restricciones.</p>
@@ -229,10 +229,10 @@ export default function HomePage() {
 
       {/* ORGANIC SECTION DIVIDER */}
       <div className="relative max-w-7xl mx-auto my-12 pointer-events-none">
-        <div className="h-px bg-gradient-to-r from-transparent via-electric-500/30 to-transparent w-full" />
+        <div className="h-px bg-gradient-to-r from-transparent via-gold-500/30 to-transparent w-full" />
         <div className="absolute left-1/2 -translate-x-1/2 -top-3 px-4 bg-[#040508]">
-          <div className="w-6 h-6 rounded-full bg-electric-500/10 border border-electric-500/30 flex items-center justify-center">
-            <Sparkles className="w-3 h-3 text-electric-cyan" />
+          <div className="w-6 h-6 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center">
+            <Sparkles className="w-3 h-3 text-gold-400" />
           </div>
         </div>
       </div>
@@ -352,16 +352,16 @@ export default function HomePage() {
 
       </section>
 
-      {/* 7. CTA SECTION WITH ANIMATED GRADIENT BACKGROUND */}
+      {/* 7. CTA SECTION WITH ANIMATED GOLD GRADIENT BACKGROUND */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           whileHover={{ scale: 1.01 }}
           transition={{ duration: 0.4 }}
-          className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 border border-electric-500/40 p-8 sm:p-14 shadow-2xl"
+          className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-slate-950 via-[#0D0F17] to-slate-950 border border-gold-500/40 p-8 sm:p-14 shadow-2xl"
         >
           
           <div className="max-w-2xl space-y-6 relative z-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric-500/10 border border-electric-500/30 text-electric-cyan text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-bold uppercase tracking-wider">
               <Building2 className="w-4 h-4" />
               Exclusivo para Concesionarios en España
             </div>
@@ -377,9 +377,9 @@ export default function HomePage() {
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <Link
                 href="/publica-con-nosotros"
-                className="bg-gradient-to-r from-electric-600 via-electric-500 to-electric-cyan hover:from-electric-500 hover:to-electric-cyan text-white font-black text-sm px-8 py-4 rounded-2xl shadow-xl shadow-electric-500/30 flex items-center gap-2 transition-all hover:scale-105 uppercase tracking-wider border border-electric-cyan/40"
+                className="bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 hover:from-gold-500 hover:to-gold-600 text-slate-950 font-black text-sm px-8 py-4 rounded-2xl shadow-xl shadow-gold-500/20 flex items-center gap-2 transition-all hover:scale-105 uppercase tracking-wider"
               >
-                <Sparkles className="w-5 h-5 text-white" />
+                <Sparkles className="w-5 h-5 text-slate-950" />
                 List Your Inventory (Plan Piloto 3 Coches)
               </Link>
               <Link
@@ -391,7 +391,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="absolute top-0 right-0 w-96 h-96 bg-electric-500/10 rounded-full blur-[150px] pointer-events-none" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gold-500/10 rounded-full blur-[150px] pointer-events-none" />
         </motion.div>
       </section>
 

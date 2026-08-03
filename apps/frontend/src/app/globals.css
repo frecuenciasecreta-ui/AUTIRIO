@@ -16,52 +16,42 @@ body {
   overflow-x: hidden;
 }
 
-/* Luxury Metallic & Electric Text Gradients */
-.electric-gradient-text {
-  background: linear-gradient(135deg, #FFFFFF 0%, #38BDF8 40%, #0066FF 80%, #00F0FF 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
+/* Champagne Gold & Platinum Metallic Gradients */
 .gold-gradient-text {
-  background: linear-gradient(135deg, #FFF2C6 0%, #D4AF37 50%, #C5A059 100%);
+  background: linear-gradient(135deg, #FFFFFF 0%, #F3E5AB 40%, #D4AF37 80%, #C5A059 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .silver-gradient-text {
-  background: linear-gradient(135deg, #FFFFFF 0%, #CBD5E1 50%, #94A3B8 100%);
+  background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #94A3B8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* Glassmorphism Luxury Utilities */
 .glass-panel {
-  background: rgba(10, 13, 20, 0.75);
+  background: rgba(10, 13, 20, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.15);
 }
 
-.glass-card-electric {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 102, 255, 0.02) 100%);
+.glass-card-gold {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(212, 175, 55, 0.02) 100%);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.glass-card-electric:hover {
-  border-color: rgba(0, 102, 255, 0.6);
-  box-shadow: 0 12px 40px -10px rgba(0, 102, 255, 0.3), 0 0 20px 0 rgba(0, 240, 255, 0.2);
+.glass-card-gold:hover {
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 0 12px 40px -10px rgba(212, 175, 55, 0.3), 0 0 20px 0 rgba(243, 229, 171, 0.2);
   transform: translateY(-4px) scale(1.01);
 }
 
-.electric-glow {
-  box-shadow: 0 0 35px rgba(0, 102, 255, 0.35);
-}
-
-.cyan-glow {
-  box-shadow: 0 0 35px rgba(0, 240, 255, 0.35);
+.gold-glow {
+  box-shadow: 0 0 35px rgba(212, 175, 55, 0.35);
 }
 
 .badge-dgt-cero {
@@ -71,7 +61,6 @@ body {
   font-size: 0.75rem;
   padding: 0.25rem 0.625rem;
   border-radius: 0.375rem;
-  box-shadow: 0 0 12px rgba(0, 163, 224, 0.4);
 }
 
 .badge-dgt-eco {
@@ -117,5 +106,5 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0066FF;
+  background: #D4AF37;
 }

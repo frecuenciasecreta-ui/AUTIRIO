@@ -18,7 +18,7 @@ export default function CarCard({ vehicle }: CarCardProps) {
   const whatsappMessage = encodeURIComponent(`Hola, estoy interesado en el vehículo: ${vehicle.title} (${formattedPrice}) publicado en IMPERIUM Auto Digital.`);
 
   return (
-    <div className="glass-card-electric rounded-3xl overflow-hidden group flex flex-col justify-between relative border border-white/10 hover:border-electric-500/60 shadow-xl transition-all duration-500">
+    <div className="glass-card-gold rounded-3xl overflow-hidden group flex flex-col justify-between relative border border-white/10 hover:border-gold-500/60 shadow-xl transition-all duration-500">
       
       {/* Image Container with Zoom & Glow Overlay */}
       <div className="relative h-60 w-full overflow-hidden bg-slate-950">
@@ -45,25 +45,25 @@ export default function CarCard({ vehicle }: CarCardProps) {
 
         {/* Location Badge */}
         <div className="absolute top-3.5 right-3.5 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10 text-[10px] font-bold text-slate-300 flex items-center gap-1">
-          <MapPin className="w-3 h-3 text-electric-cyan" />
+          <MapPin className="w-3 h-3 text-gold-400" />
           <span>Madrid, España</span>
         </div>
 
         {/* Price Pill */}
-        <div className="absolute bottom-3.5 right-3.5 bg-slate-950/90 backdrop-blur-md px-4 py-1.5 rounded-2xl border border-electric-cyan/30 shadow-xl">
-          <span className="text-xl font-black electric-gradient-text">{formattedPrice}</span>
+        <div className="absolute bottom-3.5 right-3.5 bg-slate-950/90 backdrop-blur-md px-4 py-1.5 rounded-2xl border border-gold-500/30 shadow-xl">
+          <span className="text-xl font-black gold-gradient-text">{formattedPrice}</span>
         </div>
       </div>
 
       {/* Content */}
       <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
         <div>
-          <span className="text-[11px] font-extrabold uppercase tracking-widest text-electric-300 block mb-1">
+          <span className="text-[11px] font-extrabold uppercase tracking-widest text-gold-400 block mb-1">
             {vehicle.brand?.name} • {vehicle.model?.name}
           </span>
           
           <Link href={`/coches/${vehicle.slug}`}>
-            <h3 className="text-lg font-black text-white group-hover:text-electric-cyan transition-colors line-clamp-1">
+            <h3 className="text-lg font-black text-white group-hover:text-gold-400 transition-colors line-clamp-1">
               {vehicle.title}
             </h3>
           </Link>
@@ -71,11 +71,11 @@ export default function CarCard({ vehicle }: CarCardProps) {
           {/* Specs Grid */}
           <div className="grid grid-cols-3 gap-2 mt-4 pt-3.5 border-t border-slate-800/80 text-xs text-slate-300 font-medium">
             <div className="flex items-center gap-1.5 bg-slate-900/60 p-2 rounded-xl border border-slate-800">
-              <Calendar className="w-3.5 h-3.5 text-electric-300" />
+              <Calendar className="w-3.5 h-3.5 text-gold-400" />
               <span>{vehicle.year}</span>
             </div>
             <div className="flex items-center gap-1.5 bg-slate-900/60 p-2 rounded-xl border border-slate-800">
-              <Gauge className="w-3.5 h-3.5 text-electric-300" />
+              <Gauge className="w-3.5 h-3.5 text-gold-400" />
               <span>{formattedKm} km</span>
             </div>
             <div className="flex items-center gap-1.5 bg-slate-900/60 p-2 rounded-xl border border-slate-800">
@@ -89,10 +89,10 @@ export default function CarCard({ vehicle }: CarCardProps) {
         <div className="pt-2 border-t border-slate-800/60 flex items-center justify-between gap-3">
           <Link
             href={`/coches/${vehicle.slug}`}
-            className="flex-1 bg-gradient-to-r from-electric-600 to-electric-500 hover:from-electric-500 hover:to-electric-cyan text-white text-xs font-black py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-electric-500/20 uppercase tracking-wider"
+            className="flex-1 bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 hover:from-gold-500 hover:to-gold-600 text-slate-950 text-xs font-black py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-gold-500/20 uppercase tracking-wider"
           >
             <span>Ver Ficha Técnica</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-3.5 h-3.5 text-slate-950" />
           </Link>
 
           <a

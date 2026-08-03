@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
   ShieldCheck, Sparkles, ArrowRight, Gauge, Calendar, Zap, 
   Rocket, CheckCircle2, ChevronDown 
@@ -77,7 +77,7 @@ export default function HeroShowcase() {
   return (
     <section className="relative min-h-[90vh] w-full overflow-hidden flex flex-col justify-between pt-24 pb-12 bg-[#040508]">
       
-      {/* FULLSCREEN BACKGROUND VIDEO WITH CRYSTAL CLEAR HIGH CONTRAST */}
+      {/* FULLSCREEN BACKGROUND VIDEO WITH GOLD AMBIENT VIGNETTE */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         <video
           autoPlay
@@ -91,12 +91,13 @@ export default function HeroShowcase() {
           src="/hero-video.mp4"
         />
         
-        {/* Crisp Lighting Vignette for Text Contrast without Blurring Video */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#040508] via-[#040508]/30 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#040508]/80 via-transparent to-[#040508]/80" />
+        {/* Dark Vignette Overlay for Text Contrast */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#040508] via-[#040508]/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#040508]/85 via-transparent to-[#040508]/85" />
         
-        {/* Subtle Ambient Electric Lighting */}
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[300px] bg-electric-500/10 rounded-full blur-[140px] animate-glow-pulse" />
+        {/* Warm Gold Spotlight Aura */}
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[350px] bg-gold-500/15 rounded-full blur-[160px] animate-glow-pulse" />
+        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[300px] bg-amber-500/10 rounded-full blur-[150px] animate-glow-pulse" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto space-y-12">
@@ -108,14 +109,14 @@ export default function HeroShowcase() {
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="text-center space-y-6 max-w-5xl mx-auto"
         >
-          <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-slate-950/80 border border-electric-500/40 text-xs font-black tracking-widest uppercase text-electric-300 shadow-2xl backdrop-blur-md">
-            <Sparkles className="w-4 h-4 text-electric-cyan animate-pulse" />
+          <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-slate-950/80 border border-gold-500/40 text-xs font-black tracking-widest uppercase text-gold-400 shadow-2xl backdrop-blur-md">
+            <Sparkles className="w-4 h-4 text-gold-400 animate-pulse" />
             <span>IMPERIUM Auto Digital • Sistema Comercial B2B + B2C</span>
           </div>
 
           <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black text-white tracking-tight leading-none uppercase">
             Redefining <br />
-            <span className="electric-gradient-text">
+            <span className="gold-gradient-text">
               The Art of Driving
             </span>
           </h1>
@@ -128,28 +129,28 @@ export default function HeroShowcase() {
           <div className="pt-4 flex flex-wrap items-center justify-center gap-5">
             <Link
               href="/coches"
-              className="group relative inline-flex items-center gap-3 px-8 py-4.5 rounded-2xl bg-gradient-to-r from-electric-600 via-electric-500 to-electric-cyan text-white font-black text-xs uppercase tracking-wider shadow-2xl shadow-electric-500/40 hover:scale-105 transition-all duration-300 border border-electric-cyan/40"
+              className="group relative inline-flex items-center gap-3 px-8 py-4.5 rounded-2xl bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 text-slate-950 font-black text-xs uppercase tracking-wider shadow-2xl shadow-gold-500/30 hover:scale-105 transition-all duration-300"
             >
               <span>Explorar Vehículos Certificados</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 text-slate-950 group-hover:translate-x-1 transition-transform" />
             </Link>
 
             <Link
               href="/publica-con-nosotros"
-              className="group inline-flex items-center gap-3 px-8 py-4.5 rounded-2xl bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 text-slate-950 font-black text-xs uppercase tracking-wider shadow-2xl shadow-gold-500/20 hover:scale-105 transition-all duration-300"
+              className="group inline-flex items-center gap-3 px-8 py-4.5 rounded-2xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-bold text-xs uppercase tracking-wider border border-slate-700/80 hover:border-gold-500/50 shadow-xl transition-all hover:scale-105"
             >
-              <Rocket className="w-4 h-4 text-slate-950" />
+              <Rocket className="w-4 h-4 text-gold-400" />
               <span>Solicitar Plan Piloto Concesionarios</span>
             </Link>
           </div>
         </motion.div>
 
-        {/* FLOATING GLASSMORPHISM CAR SPEC TICKER (TESLA/PORSCHE STYLE) */}
+        {/* FLOATING GLASSMORPHISM CAR SPEC TICKER */}
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.2 }}
-          className="glass-card-electric p-6 sm:p-8 rounded-3xl max-w-5xl mx-auto shadow-2xl border border-electric-500/30 backdrop-blur-xl"
+          className="glass-card-gold p-6 sm:p-8 rounded-3xl max-w-5xl mx-auto shadow-2xl border border-gold-500/30 backdrop-blur-xl"
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center items-center divide-x divide-slate-800/80">
             
@@ -160,7 +161,7 @@ export default function HeroShowcase() {
 
             <div className="space-y-1 pl-4">
               <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block">Aceleración</span>
-              <div className="text-xl font-black text-electric-cyan">{currentCar.accel}</div>
+              <div className="text-xl font-black text-gold-400">{currentCar.accel}</div>
             </div>
 
             <div className="space-y-1 pl-4">
@@ -181,7 +182,7 @@ export default function HeroShowcase() {
               Revisión técnica de 150 puntos y garantía oficial nacional
             </span>
             
-            <Link href={`/coches/${currentCar.slug}`} className="text-electric-cyan font-bold hover:underline flex items-center gap-1">
+            <Link href={`/coches/${currentCar.slug}`} className="text-gold-400 font-bold hover:underline flex items-center gap-1">
               Ver Ficha Técnica
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
@@ -195,7 +196,7 @@ export default function HeroShowcase() {
         <span className="text-[10px] uppercase font-extrabold text-slate-400 tracking-widest block mb-1">
           Desliza para Explorar
         </span>
-        <ChevronDown className="w-5 h-5 text-electric-cyan mx-auto" />
+        <ChevronDown className="w-5 h-5 text-gold-400 mx-auto" />
       </div>
 
     </section>

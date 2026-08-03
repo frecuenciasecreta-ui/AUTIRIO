@@ -23,7 +23,7 @@ export default function HeroSearch() {
   };
 
   return (
-    <div className="w-full glass-card-electric p-6 sm:p-8 rounded-3xl border border-electric-500/30 shadow-2xl">
+    <div className="w-full glass-card-gold p-6 sm:p-8 rounded-3xl border border-gold-500/30 shadow-2xl">
       <form onSubmit={handleSearch} className="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
         
         {/* Brand */}
@@ -32,7 +32,7 @@ export default function HeroSearch() {
           <select
             value={brandId}
             onChange={(e) => setBrandId(e.target.value)}
-            className="w-full bg-slate-900/90 border border-slate-700 text-white rounded-xl px-3.5 py-3 text-xs font-bold focus:outline-none focus:border-electric-cyan transition-colors"
+            className="w-full bg-slate-900/90 border border-slate-700 text-white rounded-xl px-3.5 py-3 text-xs font-bold focus:outline-none focus:border-gold-400 transition-colors"
           >
             <option value="">Todas las Marcas</option>
             <option value="porsche">Porsche</option>
@@ -48,7 +48,7 @@ export default function HeroSearch() {
           <select
             value={maxPrice}
             onChange={(e) => setMaxPrice(e.target.value)}
-            className="w-full bg-slate-900/90 border border-slate-700 text-white rounded-xl px-3.5 py-3 text-xs font-bold focus:outline-none focus:border-electric-cyan transition-colors"
+            className="w-full bg-slate-900/90 border border-slate-700 text-white rounded-xl px-3.5 py-3 text-xs font-bold focus:outline-none focus:border-gold-400 transition-colors"
           >
             <option value="">Sin Límite de Precio</option>
             <option value="50000">Hasta 50.000 €</option>
@@ -64,7 +64,7 @@ export default function HeroSearch() {
           <select
             value={fuelTypeId}
             onChange={(e) => setFuelTypeId(e.target.value)}
-            className="w-full bg-slate-900/90 border border-slate-700 text-white rounded-xl px-3.5 py-3 text-xs font-bold focus:outline-none focus:border-electric-cyan transition-colors"
+            className="w-full bg-slate-900/90 border border-slate-700 text-white rounded-xl px-3.5 py-3 text-xs font-bold focus:outline-none focus:border-gold-400 transition-colors"
           >
             <option value="">Todos los Combustibles</option>
             <option value="ELECTRICO_BEV">100% Eléctrico (BEV)</option>
@@ -80,7 +80,7 @@ export default function HeroSearch() {
           <select
             value={dgtEcoLabelId}
             onChange={(e) => setDgtEcoLabelId(e.target.value)}
-            className="w-full bg-slate-900/90 border border-slate-700 text-white rounded-xl px-3.5 py-3 text-xs font-bold focus:outline-none focus:border-electric-cyan transition-colors"
+            className="w-full bg-slate-900/90 border border-slate-700 text-white rounded-xl px-3.5 py-3 text-xs font-bold focus:outline-none focus:border-gold-400 transition-colors"
           >
             <option value="">Cualquier Etiqueta</option>
             <option value="CERO">🔵 DGT CERO Emisiones</option>
@@ -94,9 +94,9 @@ export default function HeroSearch() {
         <div>
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-electric-600 via-electric-500 to-electric-cyan hover:from-electric-500 hover:to-electric-cyan text-white font-black py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-electric-500/30 transition-all duration-200 uppercase tracking-wider text-xs"
+            className="w-full bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 hover:from-gold-500 hover:to-gold-600 text-slate-950 font-black py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-gold-500/20 transition-all duration-200 uppercase tracking-wider text-xs"
           >
-            <Search className="w-4 h-4" />
+            <Search className="w-4 h-4 text-slate-950" />
             Buscar Vehículos
           </button>
         </div>
