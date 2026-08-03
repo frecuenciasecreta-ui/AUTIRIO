@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  ChevronLeft, ChevronRight, ShieldCheck, Sparkles, ArrowRight, 
-  Gauge, Calendar, Zap, Rocket, Video, Play, CheckCircle2, ChevronDown 
+  ShieldCheck, Sparkles, ArrowRight, Gauge, Calendar, Zap, 
+  Rocket, CheckCircle2, ChevronDown 
 } from 'lucide-react';
 
 interface ShowcaseCar {
@@ -75,25 +75,28 @@ export default function HeroShowcase() {
   const currentCar = SHOWCASE_CARS[currentIndex];
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden flex flex-col justify-between pt-24 pb-12 bg-[#040508]">
+    <section className="relative min-h-[90vh] w-full overflow-hidden flex flex-col justify-between pt-24 pb-12 bg-[#040508]">
       
-      {/* FULLSCREEN BACKGROUND VIDEO WITH SMOOTH GRADIENT OVERLAYS */}
+      {/* FULLSCREEN BACKGROUND VIDEO WITH CRYSTAL CLEAR HIGH CONTRAST */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover scale-105 filter brightness-90 contrast-105 transition-all duration-1000"
+          // @ts-ignore
+          webkit-playsinline="true"
+          preload="auto"
+          className="w-full h-full object-cover filter brightness-100 contrast-105 transition-all duration-700"
           src="/hero-video.mp4"
         />
-        {/* Dark Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#040508] via-[#040508]/60 to-[#040508]/40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#040508]/90 via-[#040508]/40 to-[#040508]/90" />
         
-        {/* Animated Glow Spotlights */}
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[350px] bg-electric-500/15 rounded-full blur-[160px] animate-glow-pulse" />
-        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[300px] bg-gold-500/10 rounded-full blur-[150px] animate-glow-pulse" />
+        {/* Crisp Lighting Vignette for Text Contrast without Blurring Video */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#040508] via-[#040508]/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#040508]/80 via-transparent to-[#040508]/80" />
+        
+        {/* Subtle Ambient Electric Lighting */}
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[300px] bg-electric-500/10 rounded-full blur-[140px] animate-glow-pulse" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto space-y-12">
@@ -117,7 +120,7 @@ export default function HeroShowcase() {
             </span>
           </h1>
 
-          <p className="text-base sm:text-xl text-slate-300 font-medium max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-xl text-slate-300 font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-md">
             Compra y venta gestionada de vehículos de alta gama y selección profesional en España. <strong className="text-gold-400">Importe neto protegido para el concesionario.</strong>
           </p>
 
@@ -146,7 +149,7 @@ export default function HeroShowcase() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.2 }}
-          className="glass-card-electric p-6 sm:p-8 rounded-3xl max-w-5xl mx-auto shadow-2xl border border-electric-500/30"
+          className="glass-card-electric p-6 sm:p-8 rounded-3xl max-w-5xl mx-auto shadow-2xl border border-electric-500/30 backdrop-blur-xl"
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center items-center divide-x divide-slate-800/80">
             
@@ -173,7 +176,7 @@ export default function HeroShowcase() {
           </div>
 
           <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
-            <span className="flex items-center gap-2">
+            <span className="flex items-center gap-2 font-medium">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
               Revisión técnica de 150 puntos y garantía oficial nacional
             </span>
