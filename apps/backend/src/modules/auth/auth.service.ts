@@ -1,15 +1,36 @@
-import { Injectable, UnauthorizedException, BadRequestException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, BadRequestException, OnModuleInit } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../../prisma/prisma.service';
 import * as argon2 from 'argon2';
 import { LoginDto } from './dto/login.dto';
 
 @Injectable()
-export class AuthService {
+export class AuthService implements OnModuleInit {
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService,
   ) {}
+
+  async onModuleInit() {
+    try {
+      const adminCount = await this.prisma.user.count();
+      if (adminCount === 0) {
+        const passwordHash = await argon2.hash('admin123456');
+        await this.prisma.user.create({
+          data: {
+            email: 'admin@automaestro.es',
+            passwordHash,
+            name: 'Administrador Principal',
+            role: 'ADMIN',
+            isActive: true,
+          },
+        });
+        console.log('✅ Initial Admin seeded: admin@automaestro.es / admin123456');
+      }
+    } catch (e) {
+      console.error('Error seeding admin user:', e);
+    }
+  }
 
   async login(dto: LoginDto, ipAddress?: string) {
     const user = await this.prisma.user.findUnique({
