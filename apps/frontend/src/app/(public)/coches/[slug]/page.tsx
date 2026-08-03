@@ -436,45 +436,58 @@ export default async function VehicleDetailPage({ params }: { params: { slug: st
             </div>
 
             {/* Direct WhatsApp CTA Button (GREEN AUTONAL STYLE) */}
-            <a
-              href={`https://wa.me/34600112233?text=${whatsappMsg}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => {
-                if (typeof window !== 'undefined' && (window as any).gtag) {
-                  (window as any).gtag('event', 'generate_lead', {
-                    event_category: 'engagement',
-                    event_label: 'whatsapp_click',
-                    value: vehicle.price
-                  });
-                }
-              }}
-              className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-4 px-4 rounded-2xl flex items-center justify-center gap-3 shadow-xl shadow-emerald-600/30 transition-all hover:scale-[1.02] text-sm"
-            >
-              <MessageSquare className="w-5 h-5 fill-current" />
-              Contactar por WhatsApp
-            </a>
+            <div className="space-y-2">
+              <a
+                href={`https://wa.me/34643860840?text=${whatsappMsg}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).gtag) {
+                    (window as any).gtag('event', 'generate_lead', {
+                      event_category: 'engagement',
+                      event_label: 'whatsapp_click_spain',
+                      value: vehicle.price
+                    });
+                  }
+                }}
+                className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-4 px-4 rounded-2xl flex items-center justify-center gap-3 shadow-xl shadow-emerald-600/30 transition-all hover:scale-[1.02] text-xs uppercase tracking-wider"
+              >
+                <MessageSquare className="w-5 h-5 fill-current" />
+                <span>WhatsApp España (+34 643 86 08 40)</span>
+              </a>
+
+              <a
+                href={`https://wa.me/573125316882?text=${whatsappMsg}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-emerald-700/80 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-2xl flex items-center justify-center gap-2 border border-emerald-500/40 transition-all text-xs"
+              >
+                <MessageSquare className="w-4 h-4 fill-current" />
+                <span>WhatsApp LatAm (+57 312 5316882)</span>
+              </a>
+            </div>
 
             {/* Secondary Financing Button */}
             <a
-              href={`https://wa.me/34600112233?text=${encodeURIComponent(`Hola, quiero solicitar la simulación de financiación para el coche: ${vehicle.title}`)}`}
+              href={`https://wa.me/34643860840?text=${encodeURIComponent(`Hola, quiero solicitar la simulación de financiación para el coche: ${vehicle.title}`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-4 rounded-2xl border border-slate-700 flex items-center justify-center gap-2 transition-colors text-xs"
             >
-              <CreditCard className="w-4 h-4 text-brand-accent" />
+              <CreditCard className="w-4 h-4 text-gold-400" />
               Solicitar Financiación Personalizada
             </a>
 
             {/* Contact Phone & Email */}
             <div className="pt-4 border-t border-slate-800 space-y-3 text-xs text-slate-300">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-xl bg-brand-accent/10 border border-brand-accent/30 flex items-center justify-center text-brand-accent">
+                <div className="w-8 h-8 rounded-xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
                   <Phone className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-slate-400 block font-bold">Atención Telefónica</span>
-                  <a href="tel:+34912345678" className="font-extrabold text-white hover:text-brand-accent transition-colors">+34 912 345 678</a>
+                  <span className="text-[10px] text-slate-400 block font-bold">Atención Telefónica Directa</span>
+                  <a href="tel:+34643860840" className="font-extrabold text-white hover:text-gold-400 transition-colors">+34 643 86 08 40</a>
+                  <span className="text-slate-500 text-[10px] block">/ +57 312 5316882</span>
                 </div>
               </div>
 

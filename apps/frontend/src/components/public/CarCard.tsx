@@ -96,7 +96,7 @@ export default function CarCard({ vehicle }: CarCardProps) {
           </Link>
 
           <a
-            href={`https://wa.me/34600112233?text=${whatsappMessage}`}
+            href={`https://wa.me/34643860840?text=${whatsappMessage}`}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 p-3 rounded-xl flex items-center justify-center transition-colors shadow-lg"
