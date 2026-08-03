@@ -5,8 +5,8 @@ import { fetchApi } from '@/lib/api';
 import { ShieldCheck, Lock, Mail, ArrowRight } from 'lucide-react';
 
 export default function AdminLoginPage() {
-  const [email, setEmail] = useState('admin@automaestro.es');
-  const [password, setPassword] = useState('AutoMaestroAdmin2026!');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -59,6 +59,7 @@ export default function AdminLoginPage() {
               <input
                 type="email"
                 required
+                placeholder="admin@automaestro.es"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3.5 py-3 text-xs pl-10 focus:outline-none focus:border-brand-accent"
@@ -73,6 +74,7 @@ export default function AdminLoginPage() {
               <input
                 type="password"
                 required
+                placeholder="••••••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3.5 py-3 text-xs pl-10 focus:outline-none focus:border-brand-accent"
@@ -90,10 +92,6 @@ export default function AdminLoginPage() {
             <ArrowRight className="w-4 h-4" />
           </button>
         </form>
-
-        <div className="text-center pt-2 text-[11px] text-slate-400">
-          Credenciales por defecto: <code className="text-brand-accent bg-slate-900 px-1.5 py-0.5 rounded">admin@automaestro.es</code>
-        </div>
 
       </div>
     </div>

@@ -41,12 +41,7 @@ export class AuthService implements OnModuleInit {
       throw new UnauthorizedException('Credenciales inválidas o cuenta inactiva');
     }
 
-    let passwordMatches = await argon2.verify(user.passwordHash, dto.password);
-    if (!passwordMatches && user.email === 'admin@automaestro.es') {
-      if (dto.password === 'admin123456' || dto.password === 'AutoMaestroAdmin2026!') {
-        passwordMatches = true;
-      }
-    }
+    const passwordMatches = await argon2.verify(user.passwordHash, dto.password);
     if (!passwordMatches) {
       throw new UnauthorizedException('Credenciales inválidas');
     }
