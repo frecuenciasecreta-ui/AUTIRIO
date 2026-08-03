@@ -29,7 +29,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     const token = localStorage.getItem('automaestro_token');
     const userData = localStorage.getItem('automaestro_user');
 
-    if (!token && !pathname?.includes('/admin/login')) {
+    if (!token && !userData && !pathname?.includes('/admin/login')) {
       router.push('/admin/login');
     } else if (userData) {
       try {
