@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ChevronLeft, ChevronRight, ShieldCheck, Sparkles, ArrowRight, 
-  Gauge, Calendar, Zap, Rocket, Video, Target 
+  Gauge, Calendar, Zap, Rocket, Video, Target, Play 
 } from 'lucide-react';
 
 interface ShowcaseCar {
@@ -26,8 +26,21 @@ interface ShowcaseCar {
 const SHOWCASE_CARS: ShowcaseCar[] = [
   {
     id: '1',
+    brand: 'BMW',
+    model: 'M4 Competition Coupé',
+    tagline: 'Vídeo 4K Generado con IA en Atardecer Épico & Paquete Aerodinámico',
+    price: '108.500 €',
+    year: 2024,
+    km: '11.500 km',
+    hp: 510,
+    imageUrl: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=1200&q=80',
+    slug: 'bmw-m4-competition-2023',
+    badge: '🚀 Vídeo 4K IA Activo',
+  },
+  {
+    id: '2',
     brand: 'PORSCHE',
-    model: '911 Carrera GTS',
+    model: '911 Carrera GTS PDK',
     tagline: 'Deportivo Pura Sangre con Tratamiento Cerámico y Vídeo 4K',
     price: '189.900 €',
     year: 2024,
@@ -38,7 +51,7 @@ const SHOWCASE_CARS: ShowcaseCar[] = [
     badge: 'Etiqueta C DGT',
   },
   {
-    id: '2',
+    id: '3',
     brand: 'MERCEDES-BENZ',
     model: 'AMG GT R Coupe',
     tagline: 'V8 Biturbo 585CV Vértigo y Exclusividad Comercializada',
@@ -51,9 +64,9 @@ const SHOWCASE_CARS: ShowcaseCar[] = [
     badge: 'Edición Selección',
   },
   {
-    id: '3',
+    id: '4',
     brand: 'PORSCHE',
-    model: 'Taycan Turbo S',
+    model: 'Taycan Turbo S 761CV',
     tagline: 'Tecnología 100% Eléctrica 761CV de Aceleración',
     price: '154.900 €',
     year: 2023,
@@ -62,19 +75,6 @@ const SHOWCASE_CARS: ShowcaseCar[] = [
     imageUrl: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=1200&q=80',
     slug: 'porsche-taycan-turbo-s-2023-barcelona',
     badge: 'Etiqueta CERO DGT',
-  },
-  {
-    id: '4',
-    brand: 'BMW',
-    model: 'M4 Competition Coupé',
-    tagline: 'Rendimiento de Circuito Apto para el Día a Día',
-    price: '108.500 €',
-    year: 2023,
-    km: '19.000 km',
-    hp: 510,
-    imageUrl: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=1200&q=80',
-    slug: 'bmw-m4-competition-2023',
-    badge: 'M Performance',
   },
 ];
 
@@ -91,7 +91,7 @@ export default function HeroShowcase() {
     if (!isAutoPlaying || !mounted) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % SHOWCASE_CARS.length);
-    }, 5000);
+    }, 6000);
     return () => clearInterval(interval);
   }, [isAutoPlaying, mounted]);
 
@@ -110,7 +110,7 @@ export default function HeroShowcase() {
   return (
     <section className="relative w-full overflow-hidden pt-20 pb-16 lg:pt-24 lg:pb-20 border-b border-gold-500/20 bg-[#050507]">
       
-      {/* Background Champagne Glows */}
+      {/* Background Champagne & Gold Glows */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[750px] h-[380px] bg-gold-500/10 rounded-full blur-[150px]" />
         <div className="absolute top-1/3 right-10 w-[450px] h-[320px] bg-amber-500/10 rounded-full blur-[130px]" />
@@ -157,7 +157,7 @@ export default function HeroShowcase() {
           </div>
         </div>
 
-        {/* HERO SHOWCASE CAROUSEL */}
+        {/* HERO SHOWCASE CAROUSEL WITH VIDEO BACKDROP */}
         <div className="relative glass-panel rounded-3xl border border-gold-500/20 overflow-hidden shadow-2xl p-6 sm:p-10 lg:p-12">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -231,7 +231,7 @@ export default function HeroShowcase() {
 
             </div>
 
-            {/* RIGHT IMAGE PRESENTATION STAGE */}
+            {/* RIGHT PRESENTATION STAGE WITH REAL VIDEO LOOP */}
             <div className="lg:col-span-7 relative h-72 sm:h-96 w-full rounded-2xl overflow-hidden bg-slate-950/80 border border-slate-800/80 flex items-center justify-center">
               
               {/* Studio Light Floor Effect */}
@@ -240,20 +240,32 @@ export default function HeroShowcase() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentCar.id}
-                  initial={{ opacity: 0, x: 80, scale: 0.95 }}
-                  animate={{ opacity: 1, x: 0, scale: 1 }}
-                  exit={{ opacity: 0, x: -80, scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.5, ease: 'easeOut' }}
                   className="relative w-full h-full"
                 >
-                  <Image
-                    src={currentCar.imageUrl}
-                    alt={currentCar.model}
-                    fill
-                    priority
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 60vw"
-                  />
+                  {/* REAL USER VIDEO LOOP OR IMAGE */}
+                  {currentCar.id === '1' ? (
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover"
+                      src="/hero-video.mp4"
+                    />
+                  ) : (
+                    <Image
+                      src={currentCar.imageUrl}
+                      alt={currentCar.model}
+                      fill
+                      priority
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 60vw"
+                    />
+                  )}
                 </motion.div>
               </AnimatePresence>
 
