@@ -11,7 +11,7 @@ export default function AutirioLogo({ className = 'h-10', variant = 'light' }: A
   
   return (
     <svg 
-      viewBox={isIcon ? "0 0 100 100" : "0 0 400 100"} 
+      viewBox={isIcon ? "0 0 100 100" : "0 0 520 100"} 
       className={className} 
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
@@ -27,14 +27,12 @@ export default function AutirioLogo({ className = 'h-10', variant = 'light' }: A
         </filter>
       </defs>
 
-      {/* ICON PART (The stylized 'A' with car silhouette) */}
+      {/* ICON PART (The stylized 'I/A' shape with car silhouette) */}
       <g transform={isIcon ? "translate(10, 10) scale(0.8)" : "translate(0, 10) scale(0.8)"}>
-        {/* The 'A' shape */}
         <path 
           d="M50 10 L15 80 H35 L50 45 L65 80 H85 L50 10Z" 
           fill="url(#blueGradient)" 
         />
-        {/* Car Silhouette Cutout / Overlay */}
         <path 
           d="M10 65 Q 30 55, 45 52 T 75 55 Q 90 60, 95 65 L 90 70 Q 75 62, 50 62 T 15 70 Z" 
           fill="#0A0E17" 
@@ -44,7 +42,7 @@ export default function AutirioLogo({ className = 'h-10', variant = 'light' }: A
         />
       </g>
 
-      {/* TEXT PART (Only if not icon variant) */}
+      {/* TEXT PART (IMPERIUM AUTO DIGITAL) */}
       {!isIcon && (
         <g transform="translate(100, 55)">
           <text 
@@ -52,23 +50,23 @@ export default function AutirioLogo({ className = 'h-10', variant = 'light' }: A
             y="0" 
             fontFamily="Inter, sans-serif" 
             fontWeight="900" 
-            fontSize="42" 
+            fontSize="34" 
             fill={textColor}
-            letterSpacing="0.15em"
+            letterSpacing="0.08em"
           >
-            AUT<tspan fill="url(#blueGradient)">I</tspan>RIO
+            IMPERIUM <tspan fill="url(#blueGradient)">AUTO</tspan>
           </text>
           
           <text 
-            x="4" 
+            x="0" 
             y="22" 
             fontFamily="Inter, sans-serif" 
-            fontWeight="600" 
-            fontSize="9" 
-            fill="#64748B"
+            fontWeight="800" 
+            fontSize="11" 
+            fill="#00A3E0"
             letterSpacing="0.25em"
           >
-            TU PRÓXIMO <tspan fill="#00A3E0">AUTO</tspan>, TU MEJOR <tspan fill="#00A3E0">ELECCIÓN</tspan>
+            SISTEMA DE MARKETING & COMERCIALIZACIÓN
           </text>
         </g>
       )}

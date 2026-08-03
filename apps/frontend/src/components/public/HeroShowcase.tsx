@@ -4,7 +4,10 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, ShieldCheck, Sparkles, ArrowRight, Gauge, Calendar, Zap } from 'lucide-react';
+import { 
+  ChevronLeft, ChevronRight, ShieldCheck, Sparkles, ArrowRight, 
+  Gauge, Calendar, Zap, Rocket, Video, TrendingUp, Target, CheckCircle2 
+} from 'lucide-react';
 
 interface ShowcaseCar {
   id: string;
@@ -25,7 +28,7 @@ const SHOWCASE_CARS: ShowcaseCar[] = [
     id: '1',
     brand: 'PORSCHE',
     model: '911 Carrera GTS',
-    tagline: 'Deportivo Pura Sangre con Tratamiento Cerámico',
+    tagline: 'Deportivo Pura Sangre con Tratamiento Cerámico y Vídeo 4K',
     price: '189.900 €',
     year: 2024,
     km: '8.500 km',
@@ -38,7 +41,7 @@ const SHOWCASE_CARS: ShowcaseCar[] = [
     id: '2',
     brand: 'MERCEDES-BENZ',
     model: 'AMG GT R Coupe',
-    tagline: 'V8 Biturbo 585CV Vértigo y Exclusividad',
+    tagline: 'V8 Biturbo 585CV Vértigo y Exclusividad Comercializada',
     price: '195.000 €',
     year: 2023,
     km: '12.000 km',
@@ -105,37 +108,56 @@ export default function HeroShowcase() {
   };
 
   return (
-    <section className="relative w-full overflow-hidden pt-24 pb-16 lg:pt-32 lg:pb-24 border-b border-slate-800/80 bg-[#07090D]">
+    <section className="relative w-full overflow-hidden pt-20 pb-16 lg:pt-28 lg:pb-24 border-b border-slate-800/80 bg-[#07090D]">
       
-      {/* Dynamic Background Glows */}
+      {/* Background Glows */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-brand-accent/15 rounded-full blur-[140px]" />
-        <div className="absolute top-1/3 right-10 w-[400px] h-[300px] bg-indigo-500/10 rounded-full blur-[120px]" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[750px] h-[380px] bg-brand-accent/15 rounded-full blur-[140px]" />
+        <div className="absolute top-1/3 right-10 w-[450px] h-[320px] bg-indigo-500/10 rounded-full blur-[130px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* HEADER BADGE & MAIN TITLE */}
-        <div className="text-center space-y-4 max-w-3xl mx-auto mb-10">
+        {/* BRAND POSITIONING BANNER */}
+        <div className="text-center space-y-5 max-w-4xl mx-auto mb-12">
           
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 text-xs font-bold text-slate-200 shadow-xl">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            <span>Encuentras más de <strong className="text-brand-accent">100+ Vehículos</strong> de Selección Certificados</span>
+            <Rocket className="w-4 h-4 text-amber-400 animate-pulse" />
+            <span>Sistema de Marketing & Comercialización Automotriz B2B + B2C</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
-            La Excelencia del Motor <br />
-            <span className="bg-gradient-to-r from-white via-slate-200 to-brand-accent bg-clip-text text-transparent">
-              Intermediación Certificada
+            No Vendemos Coches. <br />
+            <span className="bg-gradient-to-r from-white via-slate-100 to-brand-accent bg-clip-text text-transparent">
+              Creamos Sistemas para que tu Inventario se Venda Mejor.
             </span>
           </h1>
 
-          <p className="text-sm sm:text-base text-slate-400 font-medium">
-            Seleccionamos y gestionamos directamente los mejores coches deportivos y de gama alta en España.
+          <p className="text-sm sm:text-base text-slate-300 font-medium max-w-3xl mx-auto leading-relaxed">
+            Combinamos producción audiovisual 4K, campañas de publicidad digital y gestión comercial para concesionarios en España. <strong className="text-emerald-400">Importe neto protegido para el concesionario.</strong>
           </p>
+
+          {/* DUAL ACTION BUTTONS FOR B2B DEALER & B2C BUYER */}
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href="/publica-con-nosotros"
+              className="bg-brand-accent hover:bg-blue-600 text-white font-extrabold text-xs px-6 py-4 rounded-2xl shadow-xl shadow-blue-600/30 flex items-center gap-2.5 transition-all hover:scale-105 uppercase tracking-wider"
+            >
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              Solicitar Plan Piloto Concesionarios (3 Coches - 45 Días)
+            </Link>
+
+            <Link
+              href="/coches"
+              className="bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white font-bold text-xs px-6 py-4 rounded-2xl border border-slate-700/80 flex items-center gap-2 transition-all hover:scale-105 uppercase tracking-wider"
+            >
+              Ver Catálogo de Selección
+              <ArrowRight className="w-4 h-4 text-brand-accent" />
+            </Link>
+          </div>
         </div>
 
-        {/* HERO SHOWCASE DISPLAY CAROUSEL */}
+        {/* HERO SHOWCASE CAROUSEL */}
         <div className="relative glass-panel rounded-3xl border border-slate-800/80 overflow-hidden shadow-2xl p-6 sm:p-10 lg:p-12">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -192,7 +214,7 @@ export default function HeroShowcase() {
 
                   <div className="pt-4 flex flex-wrap items-center gap-4">
                     <div>
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block">Precio Final</span>
+                      <span className="text-[10px] uppercase font-bold text-slate-400 block">Precio Certificado</span>
                       <span className="text-3xl font-black text-white">{currentCar.price}</span>
                     </div>
 
@@ -200,7 +222,7 @@ export default function HeroShowcase() {
                       href={`/coches/${currentCar.slug}`}
                       className="ml-auto bg-brand-accent hover:bg-blue-600 text-white font-bold text-xs px-6 py-3.5 rounded-xl shadow-lg shadow-blue-600/30 flex items-center gap-2 transition-all hover:scale-105"
                     >
-                      Ver Ficha Técnica
+                      Ver Ficha y Vídeo
                       <ArrowRight className="w-4 h-4" />
                     </Link>
                   </div>
@@ -273,27 +295,6 @@ export default function HeroShowcase() {
 
           </div>
 
-        </div>
-
-        {/* BOTTOM CAR BRAND CAROUSEL STRIP */}
-        <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {SHOWCASE_CARS.map((car, idx) => (
-            <button
-              key={car.id}
-              onClick={() => {
-                setIsAutoPlaying(false);
-                setCurrentIndex(idx);
-              }}
-              className={`p-3 rounded-2xl border text-left transition-all ${
-                idx === currentIndex
-                  ? 'bg-slate-900 border-brand-accent shadow-lg shadow-blue-500/10'
-                  : 'bg-slate-950/60 border-slate-800/80 hover:border-slate-700 opacity-70 hover:opacity-100'
-              }`}
-            >
-              <span className="text-[10px] uppercase font-bold text-slate-400 block">{car.brand}</span>
-              <span className="text-xs font-bold text-white truncate block">{car.model}</span>
-            </button>
-          ))}
         </div>
 
       </div>

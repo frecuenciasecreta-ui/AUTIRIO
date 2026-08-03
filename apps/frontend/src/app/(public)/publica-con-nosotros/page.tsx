@@ -3,10 +3,12 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { fetchApi } from '@/lib/api';
-import { Sparkles, Building2, ShieldCheck, CheckCircle2, Send, PhoneCall, TrendingUp, Target } from 'lucide-react';
+import { Sparkles, Building2, ShieldCheck, CheckCircle2, Send, PhoneCall, TrendingUp, Target, Rocket, Calculator, Check, Video } from 'lucide-react';
 import { Turnstile } from '@marsidev/react-turnstile';
 
 export default function PublicaConNosotrosPage() {
+  const [netPrice, setNetPrice] = useState<number>(18500);
+
   const [formData, setFormData] = useState({
     name: '',
     companyName: '',
@@ -16,6 +18,7 @@ export default function PublicaConNosotrosPage() {
     province: '',
     approxVehicles: '1-10',
     businessType: 'Concesionario Oficial',
+    pilotOption: 'Prueba Piloto 3 Vehículos (45 Días)',
     message: '',
     privacyAccepted: false,
   });
@@ -24,6 +27,10 @@ export default function PublicaConNosotrosPage() {
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
+  // Net price calculation logic
+  const suggestedPublicPrice = Math.round(netPrice * 1.075);
+  const imperiumFee = suggestedPublicPrice - netPrice;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,8 +51,11 @@ export default function PublicaConNosotrosPage() {
       await fetchApi('/leads/public', {
         method: 'POST',
         body: JSON.stringify({
-          type: 'B2B_PARTNER_REQUEST',
-          turnstileToken, // token to be verified in backend
+          type: 'B2B_PILOT_PARTNER_REQUEST',
+          turnstileToken,
+          netPrice,
+          suggestedPublicPrice,
+          imperiumFee,
           ...formData,
         }),
       });
@@ -55,7 +65,7 @@ export default function PublicaConNosotrosPage() {
       if (typeof window !== 'undefined' && (window as any).gtag) {
         (window as any).gtag('event', 'generate_lead', {
           event_category: 'form',
-          event_label: 'b2b_partner_request'
+          event_label: 'b2b_imperium_pilot_request'
         });
       }
     } catch (err: any) {
@@ -66,22 +76,92 @@ export default function PublicaConNosotrosPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-14">
       
       {/* Header Banner */}
-      <div className="text-center max-w-3xl mx-auto space-y-4">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-accent/20 border border-brand-accent/30 text-brand-accent text-xs font-bold">
-          <Sparkles className="w-4 h-4 text-gold-500" />
-          Servicio Exclusivo de Publicación Gestionada
+      <div className="text-center max-w-4xl mx-auto space-y-4">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-accent/20 border border-brand-accent/30 text-brand-accent text-xs font-extrabold uppercase tracking-wider">
+          <Rocket className="w-4 h-4 text-amber-400 animate-pulse" />
+          Plan Comercial IMPERIUM Auto Digital • Red de Concesionarios
         </div>
 
-        <h1 className="text-4xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-          Haz Crecer tu Concesionario o Anuncia tus Vehículos en España
+        <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
+          Suma tu Concesionario con un <br />
+          <span className="bg-gradient-to-r from-emerald-400 via-teal-200 to-brand-accent bg-clip-text text-transparent">
+            Programa Piloto de 45 Días sin Riesgo
+          </span>
         </h1>
 
-        <p className="text-base text-slate-400 leading-relaxed">
-          En AutoMaestro no permitimos el registro libre de usuarios. Toda publicación es administrada minuciosamente para garantizar un catálogo exclusivo de máxima confianza y rentabilidad.
+        <p className="text-base text-slate-300 leading-relaxed font-medium max-w-3xl mx-auto">
+          No somos una compraventa tradicional ni un catálogo estático. Somos tu infraestructura externa de marketing audiovisual, captación digital y gestión de compradores. <strong className="text-white">Tú mantienes el control total de tu precio neto.</strong>
         </p>
+      </div>
+
+      {/* NET PRICE CALCULATOR (SIMULADOR DE PRECIO NETO PROTEGIDO) */}
+      <div className="glass-panel p-8 sm:p-10 rounded-3xl border border-slate-800 bg-gradient-to-r from-slate-950 via-slate-900 to-[#0A0E17] shadow-2xl space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+          <div>
+            <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 block mb-1">
+              Simulador Transparente de Honorarios
+            </span>
+            <h3 className="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
+              <Calculator className="w-6 h-6 text-brand-accent" />
+              ¿Cómo Funciona el Modelo de Precio Neto Protegido?
+            </h3>
+          </div>
+          <span className="text-xs font-semibold text-slate-400 bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-800">
+            0 € Coste de Estructura Fija
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          {/* Slider input */}
+          <div className="lg:col-span-6 space-y-4">
+            <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
+              1. Selecciona el Importe Neto que Necesita Recibir tu Concesionario (€):
+            </label>
+            <div className="flex items-center gap-4">
+              <input
+                type="range"
+                min="5000"
+                max="100000"
+                step="500"
+                value={netPrice}
+                onChange={(e) => setNetPrice(Number(e.target.value))}
+                className="w-full h-3 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-accent"
+              />
+              <span className="text-xl font-black text-white bg-slate-900 border border-slate-700 px-4 py-2 rounded-xl min-w-[120px] text-center">
+                {netPrice.toLocaleString('es-ES')} €
+              </span>
+            </div>
+            <p className="text-xs text-slate-400">
+              *Tú fijas esta cifra por escrito antes de publicar. Si no se alcanza este importe, la venta no se realiza sin tu autorización.
+            </p>
+          </div>
+
+          {/* Result Breakdown Boxes */}
+          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <div className="bg-slate-900/90 border border-slate-800 p-5 rounded-2xl space-y-1">
+              <span className="text-[10px] font-extrabold uppercase text-slate-400 block">Precio Público Sugerido</span>
+              <div className="text-2xl font-black text-emerald-400">
+                {suggestedPublicPrice.toLocaleString('es-ES')} €
+              </div>
+              <span className="text-[11px] text-slate-400 block">Estudiado según mercado real</span>
+            </div>
+
+            <div className="bg-slate-900/90 border border-slate-800 p-5 rounded-2xl space-y-1">
+              <span className="text-[10px] font-extrabold uppercase text-slate-400 block">Honorario Autorizado IMPERIUM</span>
+              <div className="text-2xl font-black text-brand-accent">
+                {imperiumFee.toLocaleString('es-ES')} €
+              </div>
+              <span className="text-[11px] text-slate-400 block">Solo si conseguimos la venta</span>
+            </div>
+
+          </div>
+
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -90,36 +170,36 @@ export default function PublicaConNosotrosPage() {
         <div className="lg:col-span-5 space-y-8">
           
           <div className="glass-panel p-8 rounded-3xl border border-slate-800 space-y-6">
-            <h3 className="text-xl font-black text-white">¿Por qué publicar en AutoMaestro?</h3>
+            <h3 className="text-xl font-black text-white">¿Qué Incluye la Prueba Piloto?</h3>
 
             <div className="space-y-4 text-xs text-slate-300">
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-xl bg-brand-accent/20 flex items-center justify-center flex-shrink-0 text-brand-accent">
-                  <Target className="w-4 h-4" />
+                <div className="w-8 h-8 rounded-xl bg-brand-accent/20 flex items-center justify-center flex-shrink-0 text-brand-accent font-bold">
+                  1
                 </div>
                 <div>
-                  <h4 className="font-bold text-white text-sm">Compradores de Alta Capacidad</h4>
-                  <p className="text-slate-400 mt-0.5">Audiencia enfocada en vehículos seminuevos, deportivos y de ocasión con presupuesto validado.</p>
+                  <h4 className="font-bold text-white text-sm">Selección de 3 Vehículos</h4>
+                  <p className="text-slate-400 mt-0.5">Elegimos un coche de alta rotación, uno intermedio y uno que necesites rotar más rápido.</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-xl bg-emerald-500/20 flex items-center justify-center flex-shrink-0 text-emerald-400">
-                  <TrendingUp className="w-4 h-4" />
+                <div className="w-8 h-8 rounded-xl bg-emerald-500/20 flex items-center justify-center flex-shrink-0 text-emerald-400 font-bold">
+                  2
                 </div>
                 <div>
-                  <h4 className="font-bold text-white text-sm">Campañas de Marketing Dedicadas</h4>
-                  <p className="text-slate-400 mt-0.5">Promocionamos tu stock mediante Google Ads, Meta Ads (Facebook e Instagram), TikTok Ads y remarketing activo.</p>
+                  <h4 className="font-bold text-white text-sm">Producción Audiovisual 4K y Reels</h4>
+                  <p className="text-slate-400 mt-0.5">Fotografía profesional, vídeos verticales para Instagram/TikTok y fichas de alto impacto.</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-xl bg-gold-500/20 flex items-center justify-center flex-shrink-0 text-gold-500">
-                  <ShieldCheck className="w-4 h-4" />
+                <div className="w-8 h-8 rounded-xl bg-amber-500/20 flex items-center justify-center flex-shrink-0 text-amber-400 font-bold">
+                  3
                 </div>
                 <div>
-                  <h4 className="font-bold text-white text-sm">Gestión 100% Administrada</h4>
-                  <p className="text-slate-400 mt-0.5">Sin fraudes ni anuncios duplicados. Nuestro equipo carga y optimiza las fotos y fichas de tus coches.</p>
+                  <h4 className="font-bold text-white text-sm">Gestión y Calificación de Leads</h4>
+                  <p className="text-slate-400 mt-0.5">Atendemos las consultas iniciales, filtramos presupuesto y te agendamos solo compradores cualificados.</p>
                 </div>
               </div>
             </div>
@@ -131,8 +211,9 @@ export default function PublicaConNosotrosPage() {
               <PhoneCall className="w-4 h-4 text-brand-accent" />
               ¿Prefieres atención telefónica inmediata?
             </h4>
-            <p className="text-xs text-slate-400">Llama a nuestro Departamento Comercial B2B en España:</p>
-            <p className="text-lg font-black text-white">+34 900 834 210</p>
+            <p className="text-xs text-slate-400">Habla directamente con la dirección comercial de IMPERIUM Auto Digital:</p>
+            <p className="text-lg font-black text-white">+34 912 345 678</p>
+            <p className="text-xs text-slate-400">Correo directo: <strong className="text-white">direccion@imperiumautodigital.es</strong></p>
           </div>
 
         </div>
@@ -144,16 +225,16 @@ export default function PublicaConNosotrosPage() {
             {submitted ? (
               <div className="text-center py-12 space-y-4">
                 <CheckCircle2 className="w-16 h-16 text-emerald-400 mx-auto" />
-                <h3 className="text-2xl font-black text-white">¡Solicitud Enviada con Éxito!</h3>
+                <h3 className="text-2xl font-black text-white">¡Solicitud de Prueba Piloto Recibida!</h3>
                 <p className="text-sm text-slate-300 max-w-md mx-auto">
-                  Hemos recibido tus datos correctamente. Un Gestor Comercial de AutoMaestro se pondrá en contacto contigo en un plazo máximo de 24 horas laborables.
+                  Gracias por tu interés en IMPERIUM Auto Digital. Nos pondremos en contacto contigo en menos de 24 horas para coordinar la reunión de 15 minutos o la sesión de prueba audiovisual.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="border-b border-slate-800 pb-4 mb-2">
-                  <h2 className="text-xl font-black text-white">Solicitud Comercial de Publicación</h2>
-                  <p className="text-xs text-slate-400 mt-1">Rellena el formulario para consultar tarifas, planes de publicación y espacios patrocinados.</p>
+                  <h2 className="text-xl font-black text-white">Solicitar Prueba Piloto para Concesionarios</h2>
+                  <p className="text-xs text-slate-400 mt-1">Completa los datos de tu concesionario para agendar una reunión o pedir una muestra gratuita.</p>
                 </div>
 
                 {errorMsg && (
@@ -161,6 +242,20 @@ export default function PublicaConNosotrosPage() {
                     {errorMsg}
                   </div>
                 )}
+
+                {/* Opción de Prueba deseada */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 uppercase mb-1.5">¿Qué opción prefieres para empezar?</label>
+                  <select
+                    value={formData.pilotOption}
+                    onChange={(e) => setFormData({ ...formData, pilotOption: e.target.value })}
+                    className="w-full bg-slate-900 border border-brand-accent/50 text-white rounded-xl px-3.5 py-3 text-xs font-bold focus:outline-none"
+                  >
+                    <option value="Prueba Piloto 3 Vehículos (45 Días)">🚀 Prueba Piloto 3 Vehículos (45 Días sin riesgo)</option>
+                    <option value="Muestra Gratuita de Vídeo 4K (1 Coche)">🎥 Muestra Gratuita de Vídeo/Reel 4K (1 Coche)</option>
+                    <option value="Reunión Diagnóstico 15 Minutos">📞 Reunión Diagnóstico de 15 Minutos</option>
+                  </select>
+                </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Nombre */}
@@ -178,10 +273,11 @@ export default function PublicaConNosotrosPage() {
 
                   {/* Empresa */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 uppercase mb-1.5">Empresa / Concesionario</label>
+                    <label className="block text-xs font-bold text-slate-300 uppercase mb-1.5">Nombre del Concesionario *</label>
                     <input
                       type="text"
-                      placeholder="Ej. Iberia Motors S.L."
+                      required
+                      placeholder="Ej. Automóviles BCN / Reina Motors"
                       value={formData.companyName}
                       onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
                       className="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3.5 py-3 text-xs focus:outline-none focus:border-brand-accent"
@@ -205,7 +301,7 @@ export default function PublicaConNosotrosPage() {
 
                   {/* WhatsApp */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 uppercase mb-1.5">WhatsApp</label>
+                    <label className="block text-xs font-bold text-slate-300 uppercase mb-1.5">WhatsApp Directo</label>
                     <input
                       type="tel"
                       placeholder="+34 600 000 000"
@@ -219,11 +315,11 @@ export default function PublicaConNosotrosPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Email */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 uppercase mb-1.5">Correo Electrónico *</label>
+                    <label className="block text-xs font-bold text-slate-300 uppercase mb-1.5">Correo Corporativo *</label>
                     <input
                       type="email"
                       required
-                      placeholder="carlos@iberiamotors.es"
+                      placeholder="comercial@concesionario.es"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3.5 py-3 text-xs focus:outline-none focus:border-brand-accent"
@@ -232,11 +328,11 @@ export default function PublicaConNosotrosPage() {
 
                   {/* Provincia */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 uppercase mb-1.5">Provincia *</label>
+                    <label className="block text-xs font-bold text-slate-300 uppercase mb-1.5">Ubicación / Provincia *</label>
                     <input
                       type="text"
                       required
-                      placeholder="Ej. Madrid, Barcelona, Valencia"
+                      placeholder="Ej. Barcelona, Madrid, Sabadell"
                       value={formData.province}
                       onChange={(e) => setFormData({ ...formData, province: e.target.value })}
                       className="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3.5 py-3 text-xs focus:outline-none focus:border-brand-accent"
@@ -247,42 +343,40 @@ export default function PublicaConNosotrosPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Número aproximado de vehículos */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 uppercase mb-1.5">Número Aprox. de Vehículos</label>
+                    <label className="block text-xs font-bold text-slate-300 uppercase mb-1.5">Inventario Aproximado</label>
                     <select
                       value={formData.approxVehicles}
                       onChange={(e) => setFormData({ ...formData, approxVehicles: e.target.value })}
                       className="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3.5 py-3 text-xs focus:outline-none focus:border-brand-accent"
                     >
-                      <option value="1-5">De 1 a 5 coches</option>
-                      <option value="6-20">De 6 a 20 coches</option>
-                      <option value="21-50">De 21 a 50 coches</option>
+                      <option value="1-10">De 1 a 10 coches</option>
+                      <option value="11-30">De 11 a 30 coches</option>
+                      <option value="31-50">De 31 a 50 coches</option>
                       <option value="50+">Más de 50 coches</option>
                     </select>
                   </div>
 
                   {/* Tipo de negocio */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 uppercase mb-1.5">Tipo de Negocio</label>
+                    <label className="block text-xs font-bold text-slate-300 uppercase mb-1.5">Perfil del Concesionario</label>
                     <select
                       value={formData.businessType}
                       onChange={(e) => setFormData({ ...formData, businessType: e.target.value })}
                       className="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3.5 py-3 text-xs focus:outline-none focus:border-brand-accent"
                     >
                       <option value="Concesionario Oficial">Concesionario Oficial</option>
-                      <option value="Compraventa Profesional">Compraventa Profesional</option>
-                      <option value="Particular / Coleccionista">Particular / Coleccionista</option>
-                      <option value="Empresa de Renting / Flota">Empresa de Renting / Flota</option>
+                      <option value="Compraventa Profesional">Compraventa Multimarca</option>
+                      <option value="Particular / Vendedor Recurrente">Particular / Vendedor Recurrente</option>
                     </select>
                   </div>
                 </div>
 
                 {/* Mensaje */}
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 uppercase mb-1.5">Mensaje o Detalles Adicionales *</label>
+                  <label className="block text-xs font-bold text-slate-300 uppercase mb-1.5">Notas o Vehículos Sugeridos para la Prueba</label>
                   <textarea
                     rows={3}
-                    required
-                    placeholder="Indica las marcas que comercializas o si estás interesado en banners patrocinados."
+                    placeholder="Indica qué vehículos te interesaría incluir en la prueba piloto (marcas, modelos y rango de precio)."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full bg-slate-900 border border-slate-700 text-white rounded-xl p-3.5 text-xs focus:outline-none focus:border-brand-accent resize-none"
@@ -304,15 +398,6 @@ export default function PublicaConNosotrosPage() {
                   </label>
                 </div>
 
-                {/* First Layer RGPD Legal Notice Box */}
-                <div className="bg-slate-900/90 p-4 rounded-xl border border-slate-800 text-[11px] text-slate-400 space-y-1">
-                  <p><strong>Información Básica de Protección de Datos (RGPD):</strong></p>
-                  <p><strong>Responsable:</strong> AutoMaestro España S.L.</p>
-                  <p><strong>Finalidad:</strong> Gestión de consultas comerciales B2B y concertación de reuniones.</p>
-                  <p><strong>Legitimación:</strong> Consentimiento del interesado.</p>
-                  <p><strong>Derechos:</strong> Acceso, rectificación, supresión en <code className="text-slate-300">privacidad@automaestro.es</code>.</p>
-                </div>
-
                 {/* Cloudflare Turnstile */}
                 <div className="pt-2">
                   <Turnstile
@@ -325,10 +410,10 @@ export default function PublicaConNosotrosPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-brand-accent hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-2 shadow-xl shadow-blue-600/30 transition-all hover:scale-[1.01]"
+                  className="w-full bg-brand-accent hover:bg-blue-600 text-white font-extrabold py-4 px-6 rounded-xl flex items-center justify-center gap-2 shadow-xl shadow-blue-600/30 transition-all hover:scale-[1.01] uppercase tracking-wider text-xs"
                 >
                   <Send className="w-4 h-4" />
-                  {loading ? 'Enviando Solicitud...' : 'Enviar Solicitud Comercial'}
+                  {loading ? 'Enviando Solicitud...' : 'Enviar Solicitud Piloto IMPERIUM'}
                 </button>
               </form>
             )}
